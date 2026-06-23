@@ -1,77 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InsurX Exchange Terminal | Samuel Oliver</title>
+    <title>InsurX Commercial Strategy & Alignment Playbook - Samuel Oliver</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter, Outfit, JetBrains Mono) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        insurx: {
+                            50: '#f0f4ff',
+                            100: '#e1ebff',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            dark: '#050b14',
+                            teal: '#0d9488',
+                            orange: '#ea580c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap');
-
         :root {
             --bg-color: #050b14;
-            --panel-bg: rgba(13, 22, 38, 0.7);
-            --insurx-blue: #0ea5e9; /* Sky 500 */
-            --insurx-green: #10b981; /* Emerald 500 */
-            --glow-blue: rgba(14, 165, 233, 0.5);
-            --glow-green: rgba(16, 185, 129, 0.5);
+            --text-color: #e2e8f0;
+            --text-heading: #ffffff;
+            --panel-bg: rgba(13, 22, 38, 0.75);
+            --border-color: rgba(255, 255, 255, 0.07);
+            --terminal-bg: #070d19;
+            --terminal-sidebar: #0d1626;
+            --terminal-text: #38bdf8;
+            --grid-line: rgba(255, 255, 255, 0.02);
+            --glow-color: rgba(14, 165, 233, 0.15);
+            --subtle-card: rgba(30, 41, 59, 0.3);
+            --stamp-bg: #050b14;
         }
 
-        body {
-            font-family: 'Outfit', sans-serif;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(14, 165, 233, 0.3);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(14, 165, 233, 0.6);
+        }
+
+        #dashboard-wrapper {
             background-color: var(--bg-color);
-            color: #e2e8f0;
-            overflow: hidden;
+            color: var(--text-color);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                radial-gradient(circle at 50% 0%, var(--glow-color) 0%, transparent 60%),
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Glass panel effect */
         .glass-panel {
             background: var(--panel-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: background 0.5s ease, border 0.5s ease;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(14, 165, 233, 0.6); }
-
-        /* General Animations */
-        .fade-enter { animation: fadeEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .fade-exit { animation: fadeExit 0.4s ease-in forwards; }
-        
-        @keyframes fadeEnter {
-            from { opacity: 0; transform: translateY(15px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        /* SVG Glow and Highlight Effects */
+        .svg-active-node {
+            filter: drop-shadow(0px 0px 12px rgba(14, 165, 233, 0.8));
+            stroke-width: 4px !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        @keyframes fadeExit {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-10px); }
+        .svg-dimmed-node {
+            opacity: 0.35;
+            transition: all 0.3s ease;
         }
 
-        /* Phase 1: Uplink */
+        /* Scan Line Animation */
         .scan-bar {
             width: 100%;
             height: 2px;
-            background: var(--insurx-blue);
-            box-shadow: 0 0 10px var(--insurx-blue), 0 0 20px var(--insurx-blue);
+            background: #0ea5e9;
+            box-shadow: 0 0 10px #0ea5e9, 0 0 20px #0ea5e9;
             position: absolute;
             top: -10%;
-            animation: scanBar 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            animation: scanBar 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
         @keyframes scanBar {
             0% { top: -10%; opacity: 0; }
@@ -80,14 +120,20 @@
             100% { top: 110%; opacity: 0; }
         }
 
-        /* Phase 2: Orbital Nodes */
+        /* Orbit System */
         .orbital-container {
             position: relative;
-            width: 400px;
-            height: 400px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
-            border: 1px dashed rgba(14, 165, 233, 0.2);
-            animation: spin 60s linear infinite;
+            border: 1px dashed rgba(14, 165, 233, 0.15);
+            animation: spin 80s linear infinite;
+        }
+        @media (min-width: 768px) {
+            .orbital-container {
+                width: 400px;
+                height: 400px;
+            }
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         
@@ -96,315 +142,679 @@
             opacity: 0;
             animation: popNode 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-        .orbit-node-content {
-            /* Counter-rotate to keep text upright */
-            animation: spinReverse 60s linear infinite;
-        }
+        .orbit-node-content { animation: spinReverse 80s linear infinite; }
         @keyframes spinReverse { 100% { transform: rotate(-360deg); } }
         @keyframes popNode {
             from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
             to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
-        /* Phase 3: Match Lines */
+        /* HUD Row Loading Styles */
         .hud-row {
             opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.5s ease-out;
+            transform: translateX(-15px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .hud-row.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .hud-row.active { opacity: 1; transform: translateX(0); }
         .hud-line {
             width: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--insurx-green), transparent);
-            box-shadow: 0 0 8px var(--glow-green);
+            background: linear-gradient(90deg, transparent, #10b981, transparent);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
             transition: width 1s ease-in-out;
         }
         .hud-row.active .hud-line { width: 100%; }
         
-        /* Circular Progress */
-        .circular-chart { display: block; margin: 0 auto; max-width: 80%; max-height: 250px; }
+        /* Circular Chart */
+        .circular-chart { display: block; margin: 0 auto; max-width: 100%; max-height: 120px; }
         .circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 2.5; }
-        .circle { 
-            fill: none; stroke-width: 2.5; stroke-linecap: round; 
-            transition: stroke-dasharray 2.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+        .circle { fill: none; stroke-width: 2.5; stroke-linecap: round; transition: stroke-dasharray 2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+        /* Stamp Effect */
+        .stamp-final { opacity: 0; transform: scale(3) rotate(-15deg); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .stamp-final.active { opacity: 1; transform: scale(1) rotate(-4deg); animation: stampGlow 1.5s ease-in-out infinite alternate; }
+        @keyframes stampGlow {
+            0% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.7); }
         }
 
-        /* Phase 4: Terminal Typing & Stamp */
-        .terminal-text {
-            border-right: 2px solid var(--insurx-green);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-        }
+        /* Screen transitions */
+        .fade-enter { animation: fadeEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .fade-exit { animation: fadeExit 0.3s ease-in forwards; }
         
-        .stamp-final {
-            opacity: 0;
-            transform: scale(2) rotate(-10deg);
+        @keyframes fadeEnter {
+            from { opacity: 0; transform: translateY(10px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .stamp-final.active {
-            animation: stampSmash 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        @keyframes fadeExit {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-5px); }
         }
-        @keyframes stampSmash {
-            0% { opacity: 0; transform: scale(3) rotate(-10deg); filter: blur(10px); }
-            70% { opacity: 1; transform: scale(0.9) rotate(-2deg); filter: blur(0); }
-            100% { opacity: 1; transform: scale(1) rotate(-2deg); }
+
+        @keyframes shine { 100% { transform: skewX(-12deg) translateX(150%); } }
+
+        /* SUGGESTION 2: SVG Path Animated Flow Packets */
+        .flow-packet {
+            offset-rotate: auto;
+            animation: movePacket 6s linear infinite;
+        }
+        @keyframes movePacket {
+            0% {
+                offset-distance: 0%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                offset-distance: 100%;
+                opacity: 0;
+            }
         }
     </style>
 </head>
-<body class="flex h-screen w-full font-sans antialiased text-slate-300">
+<body id="dashboard-wrapper" class="font-sans antialiased min-h-screen custom-scrollbar pb-16">
 
-    <!-- Left Sidebar (Progress & Profile) -->
-    <aside class="w-80 h-full glass-panel border-r border-slate-800 flex flex-col relative z-20 flex-shrink-0">
-        <!-- Header -->
-        <div class="p-6 border-b border-slate-800/50 flex items-center gap-4">
-            <div class="w-10 h-10 rounded-lg bg-sky-500/20 flex items-center justify-center border border-sky-500/50 text-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.3)]">
-                <i class="fa-solid fa-bolt text-xl"></i>
+    <!-- HEADER & HERO SECTION -->
+    <header class="border-b border-slate-800/60 relative overflow-hidden backdrop-blur-sm z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- Status Badges -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider">COO Strategy Presentation</span>
+                    <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping"></span> Live Proposal
+                    </span>
+                </div>
             </div>
+
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 border-b border-slate-800/60 pb-8">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white font-sans" id="hero-title">
+                        Samuel Oliver <span class="text-sky-400 font-light">+</span> InsurX
+                    </h1>
+                    <p class="mt-3 text-lg text-slate-300 max-w-2xl font-light">
+                        A direct value proposition detailing my 6 years of FinTech scaling experience at Visa, precisely aligned to accelerate InsurX to its $1B premium exchange target.
+                    </p>
+                </div>
+                
+                <!-- Quick Contact Card -->
+                <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 shadow-2xl self-start lg:self-auto border border-slate-700/50">
+                    <div class="bg-gradient-to-br from-sky-500 to-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
+                        SO
+                    </div>
+                    <div>
+                        <div class="font-bold text-white text-lg flex items-center gap-1.5" id="profile-name">
+                            Samuel Oliver 
+                            <span class="text-xs font-normal text-sky-400 bg-sky-500/10 border border-sky-500/20 px-1.5 py-0.5 rounded">CMgr MCMI</span>
+                        </div>
+                        <div class="text-xs text-slate-400 font-mono mt-0.5">FinTech Specialist | Former Visa Product Analyst</div>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <a href="mailto:samueloliverj@gmail.com" class="px-3 py-1 rounded bg-slate-900/80 hover:bg-emerald-500/15 border border-slate-850 hover:border-emerald-500/40 text-emerald-400 hover:text-emerald-350 text-xs font-mono transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
+                                <i class="fa-solid fa-envelope text-emerald-500 group-hover:scale-110 transition-transform"></i> Email
+                            </a>
+                            <a href="https://linkedin.com/in/samuel-oliver100" target="_blank" class="px-3 py-1 rounded bg-slate-900/80 hover:bg-sky-500/15 border border-slate-850 hover:border-sky-500/40 text-sky-400 hover:text-sky-350 text-xs font-mono transition-all duration-300 hover:shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
+                                <i class="fa-brands fa-linkedin text-sky-500 group-hover:scale-110 transition-transform"></i> LinkedIn
+                            </a>
+                            <a href="https://Samueljoliver.github.io/Samuel-Oliver-CV" target="_blank" class="px-3 py-1 rounded bg-slate-900/80 hover:bg-purple-500/15 border border-slate-850 hover:border-purple-500/40 text-purple-400 hover:text-purple-350 text-xs font-mono transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
+                                <i class="fa-solid fa-globe text-purple-500 group-hover:rotate-12 transition-transform"></i> Portfolio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE STRENGTHS -->
+            <div class="mt-8">
+                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest font-mono mb-4">Core Strengths</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-panel p-4.5 rounded-xl border border-slate-800/80 hover:border-sky-500/40 transition-colors group">
+                        <div class="flex items-center gap-2 mb-2 text-sky-400">
+                            <i class="fa-solid fa-rocket text-sm"></i>
+                            <span class="text-white text-base font-bold font-sans" id="strength-1-title">0-to-1 Execution</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed font-light">Founder mentality; directed Visa Bill Share initiative from whiteboard ideation to cross-departmental pilot planning.</p>
+                    </div>
+                    <div class="glass-panel p-4.5 rounded-xl border border-slate-800/80 hover:border-emerald-500/40 transition-colors group">
+                        <div class="flex items-center gap-2 mb-2 text-emerald-400">
+                            <i class="fa-solid fa-scale-balanced text-sm"></i>
+                            <span class="text-white text-base font-bold font-sans" id="strength-2-title">Contract Navigation</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed font-light">Streamlined partner onboarding times at Visa and reduced billing times by 50% while checking complete compliance.</p>
+                    </div>
+                    <div class="glass-panel p-4.5 rounded-xl border border-slate-800/80 hover:border-purple-500/40 transition-colors group">
+                        <div class="flex items-center gap-2 mb-2 text-purple-400">
+                            <i class="fa-solid fa-chart-line text-sm"></i>
+                            <span class="text-white text-base font-bold font-sans" id="strength-3-title">Data Monetisation</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed font-light">Built performance dashboards managing 25M+ rows of European transaction data to extract commercial insights.</p>
+                    </div>
+                    <div class="glass-panel p-4.5 rounded-xl border border-slate-800/80 hover:border-amber-500/40 transition-colors group">
+                        <div class="flex items-center gap-2 mb-2 text-amber-400">
+                            <i class="fa-solid fa-handshake text-sm"></i>
+                            <span class="text-white text-base font-bold font-sans" id="strength-4-title">Strategic Sourcing</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed font-light font-sans">Coordinated launching programs with early-stage partners, demonstrating deep operational focus.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 z-20 relative">
+
+        <!-- SECTION 1: VISUAL BUSINESS MODEL MAP -->
+        <section class="glass-panel rounded-3xl p-6 md:p-8 border border-slate-800 relative">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
+                <div>
+                    <h2 class="text-2xl font-extrabold text-white flex items-center gap-2 font-sans" id="sec-1-title">
+                        <i class="fa-solid fa-diagram-project text-sky-500"></i> Interactive Growth Proposal: The InsurX Model
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1 font-light">
+                        Select a node below to explore my concrete, zero-friction ideas for driving transactional volume and scale.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 border border-slate-800 px-3 py-1.5 rounded-lg self-start">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
+                    <i class="fa-solid fa-hand-pointer text-[10px] text-sky-400"></i> Tap nodes to explore functions
+                </div>
+            </div>
+
+            <!-- INTERACTIVE DIAGRAM CANVAS -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- SVG Ecosystem Map -->
+                <div class="lg:col-span-8 bg-slate-950 p-6 rounded-2xl border border-slate-900/80 shadow-inner flex justify-center items-center overflow-x-auto overflow-y-hidden" id="svg-container">
+                    <svg id="ecosystem-svg" viewBox="0 0 800 450" class="w-full h-auto min-w-[600px] max-w-3xl" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#1d4ed8" />
+                            </linearGradient>
+                            <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0d9488" />
+                                <stop offset="100%" stop-color="#0f766e" />
+                            </linearGradient>
+                            <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1e293b" />
+                                <stop offset="100%" stop-color="#0f172a" />
+                            </linearGradient>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569"/>
+                            </marker>
+                            <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#3b82f6"/>
+                            </marker>
+                            <marker id="arrow-teal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0d9488"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Grid Background -->
+                        <g opacity="0.04">
+                            <line x1="100" y1="0" x2="100" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
+                            <line x1="200" y1="0" x2="200" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
+                            <line x1="400" y1="0" x2="400" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
+                            <line x1="600" y1="0" x2="600" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
+                            <line x1="700" y1="0" x2="700" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
+                            <line x1="0" y1="150" x2="800" y2="150" stroke="#ffffff" stroke-dasharray="5,5" />
+                            <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-dasharray="5,5" />
+                        </g>
+
+                        <!-- FLOW PIPELINES (Paths defined for animated packets) -->
+                        <path id="path-broker-to-exchange" d="M 180 180 Q 290 150 400 180" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-blue)"/>
+                        <path id="path-exchange-to-broker" d="M 400 220 Q 290 250 180 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                        <path id="path-insurer-to-exchange" d="M 620 180 Q 510 150 400 180" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
+                        <path id="path-exchange-to-insurer" d="M 400 220 Q 510 250 620 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                        <path id="path-exchange-to-insights-left" d="M 400 300 C 350 300, 110 320, 110 250" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                        <path id="path-exchange-to-insights-right" d="M 400 300 C 450 300, 690 320, 690 250" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+
+                        <!-- SUGGESTION 2: Glowing Animated Flow Packets -->
+                        <circle r="5" fill="#60a5fa" class="flow-packet" style="offset-path: path('M 180 180 Q 290 150 400 180');" />
+                        <circle r="4" fill="#a5f3fc" class="flow-packet" style="offset-path: path('M 400 220 Q 290 250 180 220'); animation-delay: 2s;" />
+                        <circle r="5" fill="#2dd4bf" class="flow-packet" style="offset-path: path('M 620 180 Q 510 150 400 180');" />
+                        <circle r="4" fill="#ccfbf1" class="flow-packet" style="offset-path: path('M 400 220 Q 510 250 620 220'); animation-delay: 3s;" />
+                        <circle r="4" fill="#fed7aa" class="flow-packet" style="offset-path: path('M 400 300 C 350 300, 110 320, 110 250'); animation-delay: 1.5s;" />
+                        <circle r="4" fill="#ffedd5" class="flow-packet" style="offset-path: path('M 400 300 C 450 300, 690 320, 690 250'); animation-delay: 4.5s;" />
+
+                        <!-- MODULE: CENTRAL EXCHANGE -->
+                        <g id="svg-exchange" class="cursor-pointer group select-none" onclick="showPlatformDetails()">
+                            <circle cx="400" cy="200" r="70" fill="url(#glowGrad)" stroke="#3b82f6" stroke-width="2" class="transition-all duration-300 group-hover:stroke-blue-400" />
+                            <circle cx="400" cy="200" r="77" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,10" />
+                            <text x="400" y="195" font-family="Outfit" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">InsurX</text>
+                            <text x="400" y="215" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#38bdf8" text-anchor="middle">EXCHANGE ENGINE</text>
+                        </g>
+
+                        <!-- MODULE: MARKET INSIGHTS -->
+                        <g id="svg-insights" class="cursor-pointer group select-none" onclick="showInsightsDetails()">
+                            <rect x="300" y="300" width="200" height="48" rx="12" fill="#0b1329" stroke="#ea580c" stroke-width="1.5" />
+                            <text x="400" y="321" font-family="Outfit" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Market Insights Platform</text>
+                            <text x="400" y="336" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#ea580c" text-anchor="middle">Data Sourcing</text>
+                        </g>
+
+                        <!-- MODULE: BROKERS (DEMAND) -->
+                        <g id="svg-brokers" class="cursor-pointer group select-none" onclick="showBrokerDetails()">
+                            <rect x="40" y="140" width="140" height="100" rx="16" fill="url(#blueGrad)" stroke="#60a5fa" stroke-width="1.5" />
+                            <rect x="55" y="125" width="110" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
+                            <text x="110" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#60a5fa" text-anchor="middle">27 Broking Houses</text>
+                            <text x="110" y="180" font-family="Outfit" font-size="24" fill="#ffffff" text-anchor="middle">🏢</text>
+                            <text x="110" y="210" font-family="Outfit" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">BROKERS</text>
+                            <text x="110" y="225" font-family="Outfit" font-size="9" fill="#e0f2fe" text-anchor="middle">Demand & Risk Sourcing</text>
+                        </g>
+
+                        <!-- MODULE: INSURERS (SUPPLY) -->
+                        <g id="svg-insurers" class="cursor-pointer group select-none" onclick="showInsurerDetails()">
+                            <rect x="620" y="140" width="140" height="100" rx="16" fill="url(#tealGrad)" stroke="#2dd4bf" stroke-width="1.5" />
+                            <rect x="625" y="125" width="130" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
+                            <text x="690" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#2dd4bf" text-anchor="middle">22 Follow Underwriters</text>
+                            <text x="690" y="180" font-family="Outfit" font-size="24" fill="#ffffff" text-anchor="middle">🛡️</text>
+                            <text x="690" y="210" font-family="Outfit" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">INSURERS</text>
+                            <text x="690" y="225" font-family="Outfit" font-size="9" fill="#f0fdfa" text-anchor="middle">Delegated Capital Capacity</text>
+                        </g>
+
+                        <!-- Inline labels -->
+                        <text x="290" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#60a5fa" text-anchor="middle">Electronic Placement</text>
+                        <text x="510" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#2dd4bf" text-anchor="middle">Authority Delegated</text>
+                        <text x="290" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">$150m+ Placed</text>
+                        <text x="510" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">Match Rules Applied</text>
+                    </svg>
+                </div>
+
+                <!-- Dynamic Sourcing Board -->
+                <div class="lg:col-span-4 flex flex-col justify-between">
+                    <div id="diagram-info-panel" class="glass-panel p-6 rounded-2xl h-full flex flex-col justify-between border border-slate-800">
+                        <div>
+                            <span id="panel-tag" class="text-xs font-mono font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full">Interactive Pitch</span>
+                            <h3 id="panel-title" class="text-xl font-extrabold text-white mt-4 font-sans">Growth & Execution Sourcing</h3>
+                            <p id="panel-desc" class="text-slate-300 text-sm mt-3 leading-relaxed font-light">
+                                <strong class="text-white font-medium" id="panel-desc-bold">Value Creation Playbook:</strong> I bring a 0-to-1 operational blueprint structured for multi-sided marketplaces. This visual represents how I will systematically scale each node of the exchange.<br><br>
+                                <em class="text-sky-400 font-semibold text-xs not-italic"><i class="fa-solid fa-arrow-pointer animate-bounce mr-1"></i> Tap on any segment of the ecosystem diagram to explore my specific volume growth proposals.</em>
+                            </p>
+                        </div>
+
+                        <!-- Manual Select Hooks -->
+                        <div class="grid grid-cols-2 gap-2.5 mt-8">
+                            <button onclick="showBrokerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-blue-500/5 hover:bg-blue-500/10 text-sky-400 rounded-xl text-left border border-blue-500/20 transition-all cursor-pointer">
+                                <i class="fa-solid fa-building-user mr-1.5 text-blue-400"></i> Broker Sourcing
+                            </button>
+                            <button onclick="showInsurerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-400 rounded-xl text-left border border-emerald-500/20 transition-all cursor-pointer">
+                                <i class="fa-solid fa-shield mr-1.5 text-emerald-400"></i> Insurer Onboarding
+                            </button>
+                            <button onclick="showPlatformDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-purple-500/5 hover:bg-purple-500/10 text-purple-400 rounded-xl text-left border border-purple-500/20 transition-all cursor-pointer">
+                                <i class="fa-solid fa-circle-nodes mr-1.5 text-purple-400"></i> Central Exchange
+                            </button>
+                            <button onclick="showInsightsDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-orange-500/5 hover:bg-orange-500/10 text-orange-400 rounded-xl text-left border border-orange-500/20 transition-all cursor-pointer">
+                                <i class="fa-solid fa-chart-line mr-1.5 text-orange-400"></i> Data Sourcing
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: INSURX OS TERMINAL -->
+        <section class="space-y-6">
             <div>
-                <h1 class="text-xl font-bold text-white tracking-wide">InsurX<span class="text-sky-400">OS</span></h1>
-                <p class="text-[10px] uppercase font-mono text-slate-500 tracking-widest">Exchange Terminal</p>
+                <h2 class="text-2xl font-extrabold text-white flex items-center gap-2 font-sans" id="sec-2-title">
+                    <i class="fa-solid fa-terminal text-sky-500"></i> Interactive Verification: InsurXOS Terminal
+                </h2>
+                <p class="text-slate-400 text-sm mt-1 font-light">
+                    Run my structured credentials through a simulation of the InsurX workflow to map my execution experience against your 3D underwriting criteria.
+                </p>
             </div>
-        </div>
 
-        <!-- Candidate Profile -->
-        <div class="p-6">
-            <div class="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
-                <div class="text-[10px] uppercase font-mono text-sky-400 mb-2 font-bold tracking-wider">Target Profile</div>
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center border-2 border-slate-600 overflow-hidden relative shadow-[0_0_10px_rgba(14,165,233,0.2)] shrink-0">
-                        <!-- Custom User Profile Image -->
-                        <img src="https://res.cloudinary.com/dgz07ilw7/image/upload/v1781548395/20250831_172820_awtxkc.jpg" alt="Samuel Oliver" class="w-full h-full object-cover absolute inset-0" onerror="this.src='https://placehold.co/100x100/1e293b/94a3b8?text=SO'">
-                    </div>
-                    <div>
-                        <h2 class="text-white font-semibold">Samuel Oliver</h2>
-                        <p class="text-[11px] text-slate-400">Commercial Associate</p>
-                    </div>
-                </div>
-
-                <!-- CV Professional Summary -->
-                <div class="text-[10px] text-slate-300 leading-relaxed mb-3 pb-3 border-b border-slate-700/50 italic">
-                    "Commercially-focused Product and Strategy Professional with 6 years at Visa, specialising in 0-to-1 FinTech product-to-market execution, navigating complex regulatory ecosystems, and stakeholder management."
-                </div>
-
-                <div class="flex flex-wrap gap-2 mt-2">
-                    <span class="px-2 py-1 rounded-md text-[9px] font-mono font-bold border border-sky-500/40 bg-gradient-to-r from-sky-500/10 to-transparent text-sky-300 shadow-[0_0_8px_rgba(14,165,233,0.15)] flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> FINTECH</span>
-                    <span class="px-2 py-1 rounded-md text-[9px] font-mono font-bold border border-emerald-500/40 bg-gradient-to-r from-emerald-500/10 to-transparent text-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.15)] flex items-center gap-1.5"><i class="fa-solid fa-rocket"></i> PRODUCT GTM</span>
-                    <span class="px-2 py-1 rounded-md text-[9px] font-mono font-bold border border-amber-500/40 bg-gradient-to-r from-amber-500/10 to-transparent text-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.15)] flex items-center gap-1.5"><i class="fa-solid fa-scale-balanced"></i> REGULATORY</span>
-                    <span class="px-2 py-1 rounded-md text-[9px] font-mono font-bold border border-purple-500/40 bg-gradient-to-r from-purple-500/10 to-transparent text-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.15)] flex items-center gap-1.5"><i class="fa-solid fa-chart-pie"></i> DATA ANALYTICS</span>
-                    <span class="px-2 py-1 rounded-md text-[9px] font-mono font-bold border border-rose-500/40 bg-gradient-to-r from-rose-500/10 to-transparent text-rose-300 shadow-[0_0_8px_rgba(244,63,94,0.15)] flex items-center gap-1.5"><i class="fa-solid fa-handshake"></i> PARTNERSHIPS</span>
-                    <span class="px-2 py-1 rounded-md text-[9px] font-mono font-bold border border-indigo-500/40 bg-gradient-to-r from-indigo-500/10 to-transparent text-indigo-300 shadow-[0_0_8px_rgba(99,102,241,0.15)] flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> 0-TO-1</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Vertical Timeline -->
-        <nav class="flex-grow p-6 flex flex-col justify-center">
-            <div class="relative pl-4 space-y-8">
-                <!-- Line background -->
-                <div class="absolute left-[23px] top-4 bottom-4 w-px bg-slate-800 -z-10"></div>
-                <!-- Animated active line -->
-                <div id="timeline-progress" class="absolute left-[23px] top-4 w-px bg-sky-500 shadow-[0_0_10px_#0ea5e9] transition-all duration-700 -z-10" style="height: 0%;"></div>
-
-                <div class="nav-step flex items-center gap-4 relative cursor-pointer" data-step="1">
-                    <div class="step-dot w-3 h-3 rounded-full bg-sky-500 shadow-[0_0_10px_#0ea5e9] border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-1"></div>
-                    <div>
-                        <div class="text-sm font-semibold text-white transition-colors" id="nav-title-1">Risk Submission</div>
-                        <div class="text-[10px] font-mono text-sky-400" id="nav-sub-1">Ingesting unstrucured slip</div>
-                    </div>
-                </div>
-                <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="2">
-                    <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-2"></div>
-                    <div>
-                        <div class="text-sm font-medium text-slate-400 transition-colors" id="nav-title-2">Data Extraction</div>
-                        <div class="text-[10px] font-mono text-slate-500" id="nav-sub-2">Parsing variables</div>
-                    </div>
-                </div>
-                <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="3">
-                    <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-3"></div>
-                    <div>
-                        <div class="text-sm font-medium text-slate-400 transition-colors" id="nav-title-3">3D Rules Matching</div>
-                        <div class="text-[10px] font-mono text-slate-500" id="nav-sub-3">Underwriter correlation</div>
-                    </div>
-                </div>
-                <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="4">
-                    <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-4"></div>
-                    <div>
-                        <div class="text-sm font-medium text-slate-400 transition-colors" id="nav-title-4">Delegated Binding</div>
-                        <div class="text-[10px] font-mono text-slate-500" id="nav-sub-4">Contract execution</div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main class="flex-grow flex flex-col relative overflow-hidden">
-        
-        <!-- Interactive Stages Container -->
-        <div class="flex-grow relative w-full h-full p-8 flex items-center justify-center">
-
-            <!-- STAGE 1: Risk Submission (Uplink) -->
-            <section id="stage-1" class="absolute inset-0 flex items-center justify-center transition-opacity duration-500">
-                <div class="w-full max-w-2xl text-center flex flex-col items-center">
-                    <div class="mb-6 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">Incoming Transmission</div>
-                    
-                    <div class="relative w-64 h-80 rounded-xl border border-slate-700 bg-slate-800/30 backdrop-blur overflow-hidden flex flex-col items-center justify-center shadow-2xl">
-                        <div class="scan-bar"></div>
-                        <i class="fa-solid fa-file-pdf text-6xl text-sky-500 mb-4 drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"></i>
-                        <h3 class="font-bold text-white tracking-wide">Samuel_Oliver_CV.pdf</h3>
-                        <p class="text-xs text-red-400 font-mono mt-2 border border-red-400/50 bg-red-400/10 px-2 py-1 rounded">UNSTRUCTURED SLIP</p>
-                        
-                        <!-- Upload visualizer -->
-                        <div class="absolute bottom-6 w-3/4">
-                            <div class="flex justify-between text-[10px] font-mono text-sky-300 mb-1">
-                                <span>UPLINK</span>
-                                <span id="uplink-pct">100%</span>
-                            </div>
-                            <div class="w-full h-1 bg-slate-700 rounded overflow-hidden">
-                                <div class="h-full bg-sky-500 shadow-[0_0_8px_#0ea5e9]" style="width: 100%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-8 text-slate-400 text-sm max-w-md">Broker initiates the workflow by sending an unstructured insurance slip to the InsurX platform.</p>
-                </div>
-            </section>
-
-            <!-- STAGE 2: Data Extraction (Orbital Graph) -->
-            <section id="stage-2" class="absolute inset-0 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500">
-                <div class="mb-4 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">InsurX AI Parsing Engine</div>
+            <!-- Terminal Wrapper (Fully Responsive Layout) -->
+            <div id="terminal-wrapper" class="flex flex-col lg:flex-row h-auto min-h-[950px] lg:h-[800px] w-full rounded-2xl overflow-hidden border border-slate-800 shadow-[0_10px_50px_rgba(0,0,0,0.6)] relative z-10 bg-[#070d19]/90">
                 
-                <div class="relative flex items-center justify-center w-full max-w-3xl h-[500px]">
-                    <!-- Central Hub -->
-                    <div class="absolute z-20 w-24 h-24 rounded-full bg-sky-900/50 border-2 border-sky-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(14,165,233,0.4)] backdrop-blur">
-                        <i class="fa-solid fa-brain text-3xl text-sky-300"></i>
-                    </div>
-
-                    <!-- Orbiting Nodes Container -->
-                    <div class="orbital-container" id="orbital-graph">
-                        <!-- Nodes injected via JS -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- STAGE 3: 3D Rules Matching (HUD Interface) -->
-            <section id="stage-3" class="absolute inset-0 flex flex-col hidden opacity-0 transition-opacity duration-500 px-8 py-6">
-                
-                <div class="flex justify-between items-end mb-6 flex-shrink-0">
-                    <div>
-                        <div class="inline-block px-4 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono uppercase tracking-widest mb-2">Algorithm Match</div>
-                        <h2 class="text-2xl font-bold text-white">Underwriter 3D Rules Correlation</h2>
-                    </div>
-                    
-                    <!-- Circular Score Widget -->
-                    <div class="w-32 h-32 relative flex items-center justify-center">
-                        <svg viewBox="0 0 36 36" class="circular-chart absolute inset-0 w-full h-full drop-shadow-[0_0_10px_rgba(16,185,129,0.4)]">
-                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle stroke-emerald-500" stroke-dasharray="0, 100" id="match-gauge" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="text-center z-10">
-                            <div class="text-2xl font-bold text-emerald-400" id="match-pct">0%</div>
-                            <div class="text-[8px] font-mono text-emerald-500/70 uppercase">Confidence</div>
+                <!-- Sidebar (Step Timeline) - Responsive Stack: Top on Mobile, Left on Desktop -->
+                <aside id="terminal-sidebar-el" class="w-full lg:w-80 h-auto lg:h-full border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-col relative z-20 flex-shrink-0 bg-[#0d1626]/90 p-6 lg:p-0">
+                    <!-- Header inside Sidebar -->
+                    <div class="pb-5 lg:p-6 border-b border-slate-850 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-lg bg-sky-500/15 flex items-center justify-center border border-sky-500/40 text-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
+                            <i class="fa-solid fa-bolt text-xl"></i>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Data Table Headers -->
-                <div class="flex justify-between text-[10px] font-bold font-mono text-slate-500 uppercase tracking-widest pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
-                    <div class="w-[45%]">Underwriting Rule (Job Req)</div>
-                    <div class="w-[10%] text-center">Verify</div>
-                    <div class="w-[45%] text-right">Extracted Data (Samuel's CV)</div>
-                </div>
-
-                <!-- Scrollable Match List -->
-                <div class="flex-grow overflow-y-auto pr-2 space-y-3" id="hud-container">
-                    <!-- Rows injected via JS -->
-                </div>
-            </section>
-
-            <!-- STAGE 4: Delegated Binding (Terminal & Stamp) -->
-            <section id="stage-4" class="absolute inset-0 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500 px-8">
-                
-                <div class="w-full max-w-4xl grid grid-cols-2 gap-8 items-center">
-                    
-                    <!-- Left: Terminal Execution -->
-                    <div class="glass-panel border border-slate-700 rounded-xl p-6 font-mono text-xs text-sky-300 h-80 overflow-hidden relative shadow-lg">
-                        <div class="absolute top-0 left-0 w-full h-6 bg-slate-800 border-b border-slate-700 flex items-center px-3 gap-2">
-                            <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                            <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                            <span class="text-slate-500 ml-2">insurx_auth_protocol.exe</span>
-                        </div>
-                        <div class="mt-8 space-y-2" id="terminal-output">
-                            <!-- Injected typing effect -->
+                        <div>
+                            <h1 class="text-lg lg:text-xl font-bold text-white tracking-wide">InsurX<span class="text-sky-400">OS</span></h1>
+                            <p class="text-[10px] uppercase font-mono text-slate-500 tracking-widest">Exchange Terminal</p>
                         </div>
                     </div>
 
-                    <!-- Right: The Contract -->
-                    <div class="relative flex justify-center items-center h-80">
-                        <!-- Contract Base -->
-                        <div class="w-72 h-full bg-[#f8fafc] rounded-lg shadow-2xl p-6 flex flex-col border border-slate-300 text-slate-800 transform rotate-1">
-                            <div class="border-b-2 border-slate-800 pb-2 mb-4 flex justify-between items-center">
-                                <h4 class="font-bold text-lg font-serif">InsurX</h4>
-                                <i class="fa-solid fa-file-signature text-slate-400"></i>
+                    <!-- Compact Candidate Profile -->
+                    <div class="hidden lg:block p-6">
+                        <div class="bg-[#050b14] border border-slate-800/80 rounded-xl p-4" id="terminal-profile-card">
+                            <div class="text-[10px] uppercase font-mono text-sky-400 mb-2 font-bold tracking-wider">Candidate Analysis</div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-11 h-11 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 overflow-hidden relative shadow-[0_0_10px_rgba(14,165,233,0.15)] shrink-0">
+                                    <img src="https://res.cloudinary.com/dgz07ilw7/image/upload/v1781548395/20250831_172820_awtxkc.jpg" alt="Samuel Oliver" class="w-full h-full object-cover absolute inset-0" onerror="this.src='https://placehold.co/100x100/1e293b/94a3b8?text=SO'">
+                                </div>
+                                <div>
+                                    <h2 class="text-white font-semibold text-sm">Samuel Oliver</h2>
+                                    <p class="text-[11px] text-slate-400 font-mono">Commercial Associate</p>
+                                </div>
                             </div>
-                            <h5 class="text-sm font-bold mb-1 text-center font-serif">EMPLOYMENT CONTRACT</h5>
-                            <p class="text-xs text-center text-slate-600 mb-6 font-serif">Commercial Associate Role</p>
-                            
-                            <div class="space-y-2 flex-grow">
-                                <div class="h-2 w-full bg-slate-200 rounded"></div>
-                                <div class="h-2 w-5/6 bg-slate-200 rounded"></div>
-                                <div class="h-2 w-full bg-slate-200 rounded"></div>
-                                <div class="h-2 w-4/5 bg-slate-200 rounded"></div>
-                                <div class="h-2 w-full bg-slate-200 rounded mt-4"></div>
-                                <div class="h-2 w-3/4 bg-slate-200 rounded"></div>
+                            <div class="text-[10px] text-slate-400 leading-relaxed italic mb-3">
+                                "Commercially-focused Product and Strategy Professional with 6 years at Visa, specialising in 0-to-1 FinTech product-to-market execution."
                             </div>
-
-                            <div class="mt-4 flex justify-between items-end">
-                                <div class="border-t border-slate-400 w-24 pt-1 text-[8px] text-center">Samuel Oliver</div>
-                                <div class="border-t border-slate-400 w-24 pt-1 text-[8px] text-center">InsurX Platform</div>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono border border-sky-500/30 text-sky-300">FINTECH</span>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono border border-emerald-500/30 text-emerald-300">PRODUCT GTM</span>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono border border-amber-500/30 text-amber-300">DATA INSIGHTS</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- The Holographic Stamp -->
-                        <div id="auth-stamp" class="stamp-final absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <div class="relative">
-                                <!-- Glow backdrop -->
-                                <div class="absolute inset-0 bg-emerald-500 blur-xl opacity-30 rounded-full"></div>
-                                <div class="border-[5px] border-emerald-500 text-emerald-500 px-6 py-4 rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.5)] backdrop-blur-sm bg-slate-900/80 transform flex flex-col items-center">
-                                    <span class="text-sm font-mono tracking-[0.3em] uppercase mb-1">Delegated Authority</span>
-                                    <span class="text-5xl font-black tracking-widest font-sans">BOUND</span>
+                    <!-- Vertical Timeline (Switches to responsive grid on mobile, progressive steps on desktop) -->
+                    <nav class="flex-grow flex flex-col justify-center py-4 lg:p-6 lg:justify-start lg:mt-6">
+                        <div class="relative pl-4 space-y-6 lg:space-y-8 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start">
+                            <!-- Line background -->
+                            <div class="absolute left-[23px] top-4 bottom-4 w-px bg-slate-800 -z-10 hidden lg:block"></div>
+                            <!-- Animated active line -->
+                            <div id="timeline-progress" class="absolute left-[23px] top-4 w-px bg-sky-500 shadow-[0_0_10px_#0ea5e9] transition-all duration-700 -z-10 hidden lg:block" style="height: 0%;"></div>
+
+                            <div class="nav-step flex items-center gap-4 relative cursor-pointer" data-step="1">
+                                <div class="step-dot w-3 h-3 rounded-full bg-sky-500 shadow-[0_0_10px_#0ea5e9] border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-1"></div>
+                                <div class="hidden md:block">
+                                    <div class="text-xs lg:text-sm font-semibold text-white transition-colors" id="nav-title-1">Risk Submission</div>
+                                    <div class="text-[9px] font-mono text-sky-400" id="nav-sub-1">Ingesting CV</div>
+                                </div>
+                            </div>
+                            <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="2">
+                                <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-2"></div>
+                                <div class="hidden md:block">
+                                    <div class="text-xs lg:text-sm font-medium text-slate-400 transition-colors" id="nav-title-2">Data Extraction</div>
+                                    <div class="text-[9px] font-mono text-slate-500" id="nav-sub-2">Parsing credentials</div>
+                                </div>
+                            </div>
+                            <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="3">
+                                <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-3"></div>
+                                <div class="hidden md:block">
+                                    <div class="text-xs lg:text-sm font-medium text-slate-400 transition-colors" id="nav-title-3">3D Rules Matching</div>
+                                    <div class="text-[9px] font-mono text-slate-500" id="nav-sub-3">Checking requirements</div>
+                                </div>
+                            </div>
+                            <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="4">
+                                <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-4"></div>
+                                <div class="hidden md:block">
+                                    <div class="text-xs lg:text-sm font-medium text-slate-400 transition-colors" id="nav-title-4">Delegated Binding</div>
+                                    <div class="text-[9px] font-mono text-slate-500" id="nav-sub-4">Contract execution</div>
                                 </div>
                             </div>
                         </div>
+                    </nav>
+                </aside>
+
+                <!-- Main Content Area -->
+                <main class="flex-grow flex flex-col relative overflow-hidden h-[600px] lg:h-full z-10" id="terminal-main-window">
+                    
+                    <!-- Interactive Stages Container -->
+                    <div class="flex-grow relative w-full h-full p-6 lg:p-8 flex items-center justify-center">
+
+                        <!-- STAGE 1: Risk Submission (Uplink) -->
+                        <section id="stage-1" class="absolute inset-0 flex items-center justify-center transition-opacity duration-500">
+                            <div class="w-full max-w-xl text-center flex flex-col items-center p-4">
+                                <div class="mb-6 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">Incoming Transmission</div>
+                                
+                                <div class="relative w-56 h-72 rounded-xl border border-slate-800 bg-slate-900/30 backdrop-blur overflow-hidden flex flex-col items-center justify-center shadow-2xl">
+                                    <div class="scan-bar"></div>
+                                    <i class="fa-solid fa-file-pdf text-5xl text-sky-500 mb-4 drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"></i>
+                                    <h3 class="font-bold text-white text-sm tracking-wide">01 Samuel Oliver CV.docx</h3>
+                                    <p class="text-[10px] text-amber-500 font-mono mt-2 border border-amber-500/50 bg-amber-500/10 px-2.5 py-0.5 rounded uppercase">Unstructured Document</p>
+                                    
+                                    <!-- Upload progress visualizer -->
+                                    <div class="absolute bottom-6 w-3/4">
+                                        <div class="flex justify-between text-[9px] font-mono text-sky-400 mb-1">
+                                            <span>PARSING APPLICANT</span>
+                                            <span id="uplink-pct">100%</span>
+                                        </div>
+                                        <div class="w-full h-1 bg-slate-800 rounded overflow-hidden">
+                                            <div class="h-full bg-sky-500 shadow-[0_0_8px_#0ea5e9]" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-6 text-slate-400 text-sm max-w-md font-light">Applicant initiates onboarding by submitting the unstructured CV to the validation engine.</p>
+                            </div>
+                        </section>
+
+                        <!-- STAGE 2: Data Extraction (Orbital Graph) -->
+                        <section id="stage-2" class="absolute inset-0 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500">
+                            <div class="mb-4 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">Extracting Target Variable Nodes</div>
+                            
+                            <div class="relative flex items-center justify-center w-full max-w-3xl h-[450px]">
+                                <!-- Central Hub -->
+                                <div class="absolute z-20 w-20 h-20 rounded-full bg-sky-950/80 border-2 border-sky-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(14,165,233,0.4)] backdrop-blur">
+                                    <i class="fa-solid fa-brain text-2xl text-sky-300 animate-pulse"></i>
+                                </div>
+
+                                <!-- Orbiting Nodes Container -->
+                                <div class="orbital-container" id="orbital-graph">
+                                    <!-- Nodes injected dynamically via JS -->
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- STAGE 3: 3D Rules Matching (HUD Interface) -->
+                        <section id="stage-3" class="absolute inset-0 flex flex-col hidden opacity-0 transition-opacity duration-500 px-6 lg:px-8 py-6">
+                            
+                            <div class="flex justify-between items-end mb-4 flex-shrink-0">
+                                <div>
+                                    <div class="inline-block px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono uppercase tracking-widest mb-1.5">Algorithmic Correlation</div>
+                                    <h2 class="text-xl md:text-2xl font-bold text-white font-sans">Role Requirement Match Map</h2>
+                                </div>
+                                
+                                <!-- Circular Score Widget -->
+                                <div class="w-24 h-24 relative flex items-center justify-center shrink-0">
+                                    <svg viewBox="0 0 36 36" class="circular-chart absolute inset-0 w-full h-full drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="circle stroke-emerald-500" stroke-dasharray="0, 100" id="match-gauge" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    </svg>
+                                    <div class="text-center z-10">
+                                        <div class="text-xl font-bold text-emerald-400 font-mono" id="match-pct">0%</div>
+                                        <div class="text-[8px] font-mono text-slate-500 uppercase">Match</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Table Headers -->
+                            <div class="flex justify-between text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
+                                <div class="w-[45%]">Required Capabilities</div>
+                                <div class="w-[10%] text-center">Verify</div>
+                                <div class="w-[45%] text-right">Extracted proof (from Samuel's CV)</div>
+                            </div>
+
+                            <!-- Scrollable Match List -->
+                            <div class="flex-grow overflow-y-auto custom-scrollbar pr-2 space-y-3" id="hud-container">
+                                <!-- Rows injected via JS -->
+                            </div>
+                        </section>
+
+                        <!-- STAGE 4: Delegated Binding (Contract & Stamp) -->
+                        <section id="stage-4" class="absolute inset-0 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500 px-6 lg:px-8">
+                            
+                            <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center overflow-y-auto lg:overflow-visible">
+                                
+                                <!-- Left: Terminal Execution -->
+                                <div class="glass-panel border border-slate-800 rounded-xl p-5 font-mono text-xs text-sky-400 h-56 lg:h-80 overflow-y-auto custom-scrollbar relative shadow-lg bg-slate-950/50">
+                                    <div class="absolute top-0 left-0 w-full h-6 bg-slate-900 border-b border-slate-800 flex items-center px-3 gap-2 sticky">
+                                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                        <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                        <span class="text-slate-500 ml-2 text-[10px]">insurx_onboarding_protocol.sh</span>
+                                    </div>
+                                    <div class="mt-4 space-y-1.5" id="terminal-output">
+                                        <!-- Injected typing effect -->
+                                    </div>
+                                </div>
+
+                                <!-- Right: The Dynamic Contract -->
+                                <div class="relative flex justify-center items-center h-56 lg:h-80 select-none">
+                                    <div class="w-64 h-full bg-[#f8fafc] rounded-lg shadow-2xl p-5 flex flex-col border border-slate-300 text-slate-800 transform rotate-1">
+                                        <div class="border-b border-slate-800 pb-1 mb-3 flex justify-between items-center">
+                                            <h4 class="font-bold text-base font-serif">InsurX Exchange</h4>
+                                            <i class="fa-solid fa-file-signature text-slate-400 text-sm"></i>
+                                        </div>
+                                        <h5 class="text-xs font-bold mb-1 text-center font-mono text-slate-900 uppercase tracking-wider">MEMBER CONTRACT</h5>
+                                        <p class="text-[10px] text-center text-slate-500 mb-4 font-sans font-light">Commercial Associate Onboarding</p>
+                                        
+                                        <div class="space-y-1.5 flex-grow">
+                                            <div class="h-1.5 w-full bg-slate-200 rounded"></div>
+                                            <div class="h-1.5 w-5/6 bg-slate-200 rounded"></div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded"></div>
+                                            <div class="h-1.5 w-4/5 bg-slate-200 rounded"></div>
+                                        </div>
+
+                                        <div class="mt-4 flex justify-between items-end border-t border-slate-200 pt-2">
+                                            <div class="border-t border-slate-400 w-20 pt-1 text-[7px] text-center font-mono">Samuel Oliver</div>
+                                            <div class="border-t border-slate-400 w-20 pt-1 text-[7px] text-center font-mono">COO / InsurX</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Stamped seal -->
+                                    <div id="auth-stamp" class="stamp-final absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <div class="relative">
+                                            <div class="absolute inset-0 bg-emerald-500 blur-xl opacity-30 rounded-full animate-ping"></div>
+                                            <div class="border-[4px] border-emerald-500 text-emerald-500 px-5 py-3 rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.5)] backdrop-blur-sm bg-slate-900/90 transform flex flex-col items-center">
+                                                <span class="text-[9px] font-mono tracking-[0.2em] uppercase mb-0.5" id="stamp-tag-el">Delegated Authority</span>
+                                                <span class="text-3xl font-extrabold tracking-widest font-sans">BOUND</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                </div>
 
-            </section>
-        </div>
-
-        <!-- Narrative & Control Bottom Bar -->
-        <footer class="h-28 glass-panel border-t border-slate-800 px-8 flex items-center justify-between z-20 flex-shrink-0 relative overflow-hidden">
-            <!-- Subtle gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-r from-sky-900/10 to-transparent pointer-events-none"></div>
-            
-            <div class="max-w-3xl relative z-10">
-                <h3 id="narrative-title" class="text-sm font-mono text-sky-400 mb-1 uppercase tracking-wider font-bold">Phase 1: Submitting the Risk</h3>
-                <p id="narrative-text" class="text-sm text-slate-300 leading-relaxed font-light">InsurX receives the slip (Samuel's CV) and prepares to extract unstructured data.</p>
+                    <!-- Narrative & Control Bottom Bar -->
+                    <footer class="h-28 glass-panel border-t border-slate-800 px-6 lg:px-8 flex items-center justify-between z-20 flex-shrink-0 relative overflow-hidden bg-[#0d1626]/90">
+                        <div class="absolute inset-0 bg-gradient-to-r from-sky-900/10 to-transparent pointer-events-none"></div>
+                        
+                        <div class="max-w-xl relative z-10 mr-4">
+                            <h3 id="narrative-title" class="text-xs font-mono text-sky-400 mb-1 uppercase tracking-widest font-bold">Phase 1: Submitting the Risk</h3>
+                            <p id="narrative-text" class="text-xs lg:text-sm text-slate-300 leading-relaxed font-light">Engine receives the application data payload and prepares to extract unstructured assets.</p>
+                        </div>
+                        
+                        <button id="next-btn" onclick="nextPhase()" class="relative z-10 group bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-xs py-3 px-6 rounded-lg flex items-center gap-2.5 transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.3)] overflow-hidden shrink-0 cursor-pointer">
+                            <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
+                            <span id="btn-text">INITIALIZE SYSTEM</span>
+                            <i class="fa-solid fa-terminal"></i>
+                        </button>
+                    </footer>
+                </main>
             </div>
-            
-            <button id="next-btn" onclick="nextPhase()" class="relative z-10 group bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-sm py-3 px-8 rounded flex items-center gap-3 transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.4)] overflow-hidden">
-                <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
-                <span id="btn-text">INITIALIZE SYSTEM</span>
-                <i class="fa-solid fa-terminal"></i>
-            </button>
-        </footer>
+        </section>
+
+        <!-- FINAL OUTCOME CONTAINER -->
+        <section id="cta-section" class="glass-panel p-8 rounded-3xl border border-emerald-500/25 shadow-[0_0_50px_rgba(16,185,129,0.1)] text-center max-w-4xl mx-auto hidden mt-10">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-3xl mx-auto mb-4 animate-bounce">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
+            <h2 class="text-2xl font-extrabold text-white font-sans">Ready to Unify Strategy and Execution</h2>
+            <p class="text-slate-300 font-light max-w-xl mx-auto mt-2 text-sm leading-relaxed">
+                Thank you for reviewing my strategy alignment playbook. With my technical operations and commercial execution background at Visa, I am ready to hit the ground running as InsurX's Commercial Associate.
+            </p>
+            <div class="flex flex-wrap justify-center gap-5 mt-8">
+                <!-- Schedule Conversation: Radiant Emerald Button -->
+                <a href="mailto:samueloliverj@gmail.com" class="relative group overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-mono font-bold text-xs py-3.5 px-7 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(16,185,129,0.25)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:-translate-y-1 flex items-center gap-2.5">
+                    <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
+                    <i class="fa-solid fa-envelope animate-pulse text-sm"></i> Schedule Conversation
+                </a>
+                
+                <!-- Contact LinkedIn: Royal Deep Blue Button -->
+                <a href="https://linkedin.com/in/samuel-oliver100" target="_blank" class="relative group overflow-hidden bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white font-mono font-bold text-xs py-3.5 px-7 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] hover:-translate-y-1 flex items-center gap-2.5">
+                    <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
+                    <i class="fa-brands fa-linkedin text-sm"></i> Contact on LinkedIn
+                </a>
+                
+                <!-- AI Portfolio: Cyber Violet Button -->
+                <a href="https://Samueljoliver.github.io/Samuel-Oliver-CV" target="_blank" class="relative group overflow-hidden bg-gradient-to-r from-purple-700 to-fuchsia-600 hover:from-purple-600 hover:to-fuchsia-500 text-white font-mono font-bold text-xs py-3.5 px-7 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(168,85,247,0.25)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] hover:-translate-y-1 flex items-center gap-2.5">
+                    <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
+                    <i class="fa-solid fa-globe text-sm group-hover:rotate-45 transition-transform duration-500"></i> Visit My AI Portfolio
+                </a>
+            </div>
+        </section>
+
     </main>
 
     <script>
+        // -----------------------------------------------------
+        // Interactive SVG Map Glow Controllers
+        // -----------------------------------------------------
+        function highlightSVGNode(nodeId) {
+            const nodes = ['svg-brokers', 'svg-insurers', 'svg-exchange', 'svg-insights'];
+            nodes.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === nodeId) {
+                        el.classList.add('svg-active-node');
+                        el.classList.remove('svg-dimmed-node');
+                    } else {
+                        el.classList.remove('svg-active-node');
+                        el.classList.add('svg-dimmed-node');
+                    }
+                }
+            });
+        }
+
+        function showBrokerDetails() {
+            highlightSVGNode('svg-brokers');
+            document.getElementById('panel-tag').className = 'text-xs font-mono font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full';
+            document.getElementById('panel-tag').innerText = 'Brokers';
+            document.getElementById('panel-title').innerText = 'My Ideas for Driving Broker Volumes';
+            document.getElementById('panel-desc').innerHTML = `
+                <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
+                    <li><strong>Automated CRM Email Routing:</strong> Configure automated workflow structures. When a broker uploads a Lead insurance slip to their local CRM or pipeline manager, it auto-triggers an email parsing payload direct to InsurX, removing platform-login friction.</li>
+                    <li><strong>Lead-Insurer Sourcing Pipeline:</strong> Pitch major lead underwriters to share unfulfilled capacity before rejection. If a lead can only cover 20% of a risk, they instantly route the slip to us to coordinate follow-fulfilment in under an hour. We return a consolidated, fully-backed trade contract back to the broker. This sidesteps having to rely entirely on slower broker-by-broker acquisition.</li>
+                    <li><strong>Volume-Tiered Rebates:</strong> Design targeted commercial incentives to accelerate the pipeline and encourage rapid consolidation of entire books onto the platform.</li>
+                </ul>
+            `;
+        }
+
+        function showInsurerDetails() {
+            highlightSVGNode('svg-insurers');
+            document.getElementById('panel-tag').className = 'text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full';
+            document.getElementById('panel-tag').innerText = 'Follow Underwriters';
+            document.getElementById('panel-title').innerText = 'My Ideas for Sourcing Exchange Capacity';
+            document.getElementById('panel-desc').innerHTML = `
+                <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
+                    <li><strong>Dual-Format Contract Onboarding:</strong> Accelerate delegated authority signing. Standardise legal boilerplate variables into clear, pre-vetted structures. Onboard partners using a two-copy delivery system: a plain-English reference explaining the operational logic behind each rule side-by-side with the clean compliance execution copy to preempt legal friction.</li>
+                    <li><strong>Frictionless Underwriter Launches:</strong> Leverage my experience building Visa program GTM pipelines. I will standardise follow-underwriter configuration milestones to cut onboarding cycles down from months to weeks.</li>
+                </ul>
+            `;
+        }
+
+        function showPlatformDetails() {
+            highlightSVGNode('svg-exchange');
+            document.getElementById('panel-tag').className = 'text-xs font-mono font-bold uppercase tracking-widest text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full';
+            document.getElementById('panel-tag').innerText = 'Central Platform';
+            document.getElementById('panel-title').innerText = 'My Ideas for Optimising Exchange Matches';
+            document.getElementById('panel-desc').innerHTML = `
+                <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
+                    <li><strong>InsurX-Branded Slip Summaries:</strong> Add value to every submission. Use our extraction engine to instantly return a clean, structured visual breakdown of the insurance slip as an attachment alongside our quotes. Even if we cannot fulfil that particular risk immediately, the broker gets instant visual utility, establishing InsurX as their default analysis mechanism.</li>
+                    <li><strong>Operational Bottleneck Audits:</strong> Ruthlessly map trade lifecycles to build automated post-transaction settlement systems, ensuring transaction capacity can scale to $1B premium bounds without linear headcount creep.</li>
+                </ul>
+            `;
+        }
+
+        function showInsightsDetails() {
+            highlightSVGNode('svg-insights');
+            document.getElementById('panel-tag').className = 'text-xs font-mono font-bold uppercase tracking-widest text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full';
+            document.getElementById('panel-tag').innerText = 'Market Insights';
+            document.getElementById('panel-title').innerText = 'My Ideas for Data Sourcing & Analysis';
+            document.getElementById('panel-desc').innerHTML = `
+                <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
+                    <li><strong>Underutilised Capacity Tracking:</strong> Mine exchange analytics to target follow-underwriters with custom reports. Show them precisely which overly-conservative underwriting parameters are causing them to lose transactional volume, framing target adjustments as found revenue.</li>
+                    <li><strong>Unfulfilled Risk Prospecting:</strong> Extract data from platform risks that failed to bind. Present these quantified demand pipelines directly to prospective capital providers, accelerating onboarding sales cycles using real, lost-opportunity figures.</li>
+                    <li><strong>Broker Efficiency Benchmarking:</strong> Convert raw transactional telemetry into targeted scorecards showing brokers how their execution timing matches the platform averages, driving retention through performance indicators.</li>
+                </ul>
+            `;
+        }
+
+        // -----------------------------------------------------
+        // InsurXOS System Terminal Animation Framework
+        // -----------------------------------------------------
         let currentPhase = 1;
         let hudRendered = false;
         let orbitRendered = false;
@@ -412,47 +822,45 @@
         const narrativeData = {
             1: {
                 title: "Phase 1: Submitting the Risk",
-                text: "InsurX receives the slip (Samuel's CV) and extracts 1,000 data points. The platform parses the data (Samuel's 6 years of FinTech experience) into structured risk variables (Job requirements and experience) ready for analysis.",
-                btn: "RUN EXTRACTION",
+                text: "The validation engine ingests Samuel's unformatted resume, identifying operational, compliance, and product variables to structure for immediate rule matching.",
+                btn: "RUN AI PARSING ENGINE",
                 color: "sky"
             },
             2: {
-                title: "Phase 2: Extracting Structured Data",
-                text: "The AI parsing engine converts unstructured experience into quantifiable nodes. Identifying key FinTech, product, and regulatory variables.",
-                btn: "APPLY 3D RULES",
+                title: "Phase 2: Extracting Structured Variables",
+                text: "The AI parsing engine maps unstructured history into structured token nodes, evaluating FinTech experience and commercial credentials.",
+                btn: "CORRELATE 3D RULES",
                 color: "sky"
             },
             3: {
-                title: "Phase 3: Lead Underwriters Apply 3D Rules",
-                text: "EnsureX compares extracted data (Samuel's experience) against Follow underwriters 3D rules (InsurX Job Requirements). The system identifies matches.",
-                btn: "EXECUTE CONTRACT",
+                title: "Phase 3: Correlation & Matching Rules",
+                text: "The exchange algorithm correlates Samuel's parsed credentials against the strict role requirements, evaluating compliance and business modelling capability.",
+                btn: "EXECUTE DELEGATED AGREEMENT",
                 color: "emerald"
             },
             4: {
-                title: "Phase 4: Contract Bound via Delegated Authority",
-                text: "Underwriters confirm the 3D match. Leveraging delegated authority, InsurX instantly binds the contract, completely removing friction from the process (Samuel joins the team to help scale the Exchange).",
-                btn: "RESET WORKFLOW",
+                title: "Phase 4: Contract Bound & Finalised",
+                text: "Requirements met. Leveraging delegated onboarding authority, the system locks matching structures and secures execution.",
+                btn: "RESTART PLATFORM TEST",
                 color: "emerald"
             }
         };
 
-        // Complete exact matching dataset
         const matchData = [
-            { req: "3+ years in financial services/fintech", cv: "6+ years at Visa (FinTech product execution)", icon: "fa-building-columns" },
-            { req: "Draft delegated authority contracts / Ensure regulatory compliance", cv: "Executed and Altered several FinTech Connect Contracts to Onboard Partners to the Programme while simultaneously monitering the completion of new partner risk assessments", icon: "fa-scale-balanced" },
-            { req: "Identify & deliver value / Build well-structured sales funnel", cv: "Identified pottential clients for partners on the FinTech Connect Program, Visa Bill share Feature and pottential markets for the Visa Flexible Credential", icon: "fa-filter" },
-            { req: "Take care of details / Lead new broker or insurer launches", cv: "Managed to launch of new partners onto the FinTech Connect Program and supported launch enabelemetn for the Visa flexible credential.", icon: "fa-rocket" },
-            { req: "Decide metrics & dive into data (Actionable strategies)", cv: "Built Power BI dashboard using over 25 million rows of European Payments data to show insights and trends", icon: "fa-database" },
-            { req: "Communicate effectively / Present to senior executives", cv: "Pitched Visa Bill Share to secure approval from the Product Executive Committee and regurally pitch new ideas to the ELTC Manegement Committee", icon: "fa-comments" },
-            { req: "Ownership of marketing material and pitch decks", cv: "Created internal marketing material & 1-pagers for FinTech partners to promote solutions to account teams", icon: "fa-bullhorn" },
-            { req: "Effective prioritisation & managing team workload", cv: "Managed FinTech partner expectations & coordinated multiple teams (risk, legal, billing) for timely onboarding", icon: "fa-sitemap" },
-            { req: "Identify challenges, propose and deliver solutions", cv: "Creative and able to identify gaps in service delivery and propose feature/ workflow enhancements for customers, co-inventior of 6 patents/ discolsures demonstrate idea generation and creativity.", icon: "fa-lightbulb" }
+            { req: "3+ years in FinTech / Financial Services", cv: "6+ years at Visa driving FinTech product-to-market execution.", icon: "fa-building-columns" },
+            { req: "Draft contracts & ensure compliance", cv: "Executed complex FinTech program agreements and monitored compliance assessments.", icon: "fa-scale-balanced" },
+            { req: "Identify value & build pipeline funnels", cv: "Developed regional GTM strategies and identified prospective partner channels for regional pilots.", icon: "fa-filter" },
+            { req: "Lead launcher enablement and setups", cv: "Managed the technical onboarding of international partners onto critical scheme rails.", icon: "fa-rocket" },
+            { req: "Decide metrics & run data modelling", cv: "Engineered robust Power BI analytics frameworks tracking 25M+ rows of European transaction logs.", icon: "fa-database" },
+            { req: "Execute executive presentations & communications", cv: "Secured product approval from the Executive Committee and regularly briefed leadership panels.", icon: "fa-comments" },
+            { req: "Own commercial decks & sales assets", cv: "Created localised sales pitch portfolios and structural collateral for scaling partners.", icon: "fa-bullhorn" },
+            { req: "Manage timelines & team task coordination", cv: "Aligned and coordinated multi-disciplinary cohorts (Legal, Risk, Billing) to hit launches.", icon: "fa-sitemap" },
+            { req: "Synthesise issues into active workflows", cv: "Co-inventor of 6 patent disclosures, identifying processing gaps to deploy functional enhancements.", icon: "fa-lightbulb" }
         ];
 
         function updateUI() {
             const data = narrativeData[currentPhase];
             
-            // Text & Button Updates
             document.getElementById('narrative-title').innerText = data.title;
             document.getElementById('narrative-text').innerText = data.text;
             document.getElementById('btn-text').innerText = data.btn;
@@ -461,18 +869,18 @@
             const title = document.getElementById('narrative-title');
             
             if(data.color === 'emerald') {
-                 btn.className = "relative z-10 group bg-emerald-600 hover:bg-emerald-500 text-white font-mono font-bold text-sm py-3 px-8 rounded flex items-center gap-3 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.4)] overflow-hidden";
-                 title.className = "text-sm font-mono text-emerald-400 mb-1 uppercase tracking-wider font-bold";
+                 btn.className = "relative z-10 group bg-emerald-600 hover:bg-emerald-500 text-white font-mono font-bold text-xs py-3 px-6 rounded-lg flex items-center gap-2.5 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] overflow-hidden shrink-0 cursor-pointer";
+                 title.className = "text-xs font-mono text-emerald-400 mb-1 uppercase tracking-widest font-bold";
                  if(currentPhase === 4) btn.innerHTML = `<span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span><span id="btn-text">${data.btn}</span> <i class="fa-solid fa-rotate-right"></i>`;
             } else {
-                 btn.className = "relative z-10 group bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-sm py-3 px-8 rounded flex items-center gap-3 transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.4)] overflow-hidden";
-                 title.className = "text-sm font-mono text-sky-400 mb-1 uppercase tracking-wider font-bold";
+                 btn.className = "relative z-10 group bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-xs py-3 px-6 rounded-lg flex items-center gap-2.5 transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.3)] overflow-hidden shrink-0 cursor-pointer";
+                 title.className = "text-xs font-mono text-sky-400 mb-1 uppercase tracking-widest font-bold";
                  btn.innerHTML = `<span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span><span id="btn-text">${data.btn}</span> <i class="fa-solid fa-terminal"></i>`;
             }
 
-            // Update Sidebar Timeline
             const progressHeight = ((currentPhase - 1) / 3) * 100;
-            document.getElementById('timeline-progress').style.height = `${progressHeight}%`;
+            const timelineProg = document.getElementById('timeline-progress');
+            if(timelineProg) timelineProg.style.height = `${progressHeight}%`;
 
             for(let i=1; i<=4; i++) {
                 const navStep = document.querySelector(`.nav-step[data-step="${i}"]`);
@@ -480,36 +888,45 @@
                 const navTitle = document.getElementById(`nav-title-${i}`);
                 
                 if (i <= currentPhase) {
-                    navStep.classList.remove('opacity-50');
-                    if(i === 3 || i === 4) {
-                        dot.className = "step-dot w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] border-2 border-[#050b14] transition-all duration-300 z-10";
-                    } else {
-                        dot.className = "step-dot w-3 h-3 rounded-full bg-sky-500 shadow-[0_0_10px_#0ea5e9] border-2 border-[#050b14] transition-all duration-300 z-10";
+                    if(navStep) navStep.classList.remove('opacity-50');
+                    if(dot) {
+                        if(i === 3 || i === 4) {
+                            dot.className = "step-dot w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] border-2 border-[#050b14] transition-all duration-300 z-10";
+                        } else {
+                            dot.className = "step-dot w-3 h-3 rounded-full bg-sky-500 shadow-[0_0_10px_#0ea5e9] border-2 border-[#050b14] transition-all duration-300 z-10";
+                        }
                     }
-                    navTitle.classList.replace('text-slate-400', 'text-white');
+                    if(navTitle) {
+                        navTitle.classList.remove('text-slate-400');
+                        navTitle.classList.add('text-white');
+                    }
                 } else {
-                    navStep.classList.add('opacity-50');
-                    dot.className = "step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10";
-                    navTitle.classList.replace('text-white', 'text-slate-400');
+                    if(navStep) navStep.classList.add('opacity-50');
+                    if(dot) dot.className = "step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10";
+                    if(navTitle) {
+                        navTitle.classList.remove('text-white');
+                        navTitle.classList.add('text-slate-400');
+                    }
                 }
             }
 
-            // Screen Transitions
             [1, 2, 3, 4].forEach(p => {
                 const el = document.getElementById(`stage-${p}`);
-                if(p !== currentPhase && !el.classList.contains('hidden')) {
+                if(p !== currentPhase && el && !el.classList.contains('hidden')) {
                     el.classList.remove('fade-enter');
                     el.classList.add('fade-exit');
-                    setTimeout(() => el.classList.add('hidden'), 400);
+                    setTimeout(() => el.classList.add('hidden'), 300);
                 }
             });
 
             setTimeout(() => {
                 const currentEl = document.getElementById(`stage-${currentPhase}`);
-                currentEl.classList.remove('hidden', 'fade-exit');
-                currentEl.classList.add('fade-enter');
-                triggerStageAnimation(currentPhase);
-            }, 400);
+                if(currentEl) {
+                    currentEl.classList.remove('hidden', 'fade-exit');
+                    currentEl.classList.add('fade-enter');
+                    triggerStageAnimation(currentPhase);
+                }
+            }, 300);
         }
 
         function triggerStageAnimation(phase) {
@@ -521,36 +938,43 @@
                 renderHUDMatches();
                 hudRendered = true;
             } else if (phase === 3 && hudRendered) {
-                // reset gauge and run again
-                document.getElementById('match-gauge').setAttribute('stroke-dasharray', `0, 100`);
-                document.getElementById('match-pct').innerText = `0%`;
-                setTimeout(animateGauge, 500);
+                const matchGauge = document.getElementById('match-gauge');
+                const matchPct = document.getElementById('match-pct');
+                if(matchGauge) matchGauge.setAttribute('stroke-dasharray', `0, 100`);
+                if(matchPct) matchPct.innerText = `0%`;
+                setTimeout(animateGauge, 450);
             }
             if (phase === 4) {
                 runTerminalSequence();
             } else {
-                document.getElementById('auth-stamp').classList.remove('active');
-                document.getElementById('terminal-output').innerHTML = '';
+                const stamp = document.getElementById('auth-stamp');
+                const termOutput = document.getElementById('terminal-output');
+                if(stamp) stamp.classList.remove('active');
+                if(termOutput) termOutput.innerHTML = '';
+                const ctaSection = document.getElementById('cta-section');
+                if(ctaSection) ctaSection.classList.add('hidden');
             }
         }
 
         function renderOrbitalNodes() {
             const container = document.getElementById('orbital-graph');
+            if(!container) return;
             const dataPoints = [
                 { text: "FinTech GTM", color: "sky", icon: "fa-rocket" }, 
-                { text: "25m Row Analytics", color: "emerald", icon: "fa-database" }, 
-                { text: "Risk Frameworks", color: "sky", icon: "fa-shield-halved" }, 
+                { text: "25M Data Mining", color: "emerald", icon: "fa-database" }, 
+                { text: "Compliance Check", color: "sky", icon: "fa-shield-halved" }, 
                 { text: "Visa Bill Share", color: "purple", icon: "fa-credit-card" },
-                { text: "Partner Launch", color: "emerald", icon: "fa-handshake" }, 
-                { text: "Power BI", color: "sky", icon: "fa-chart-simple" }, 
-                { text: "Pitch Decks", color: "amber", icon: "fa-chalkboard-user" }, 
-                { text: "Contract Negot.", color: "rose", icon: "fa-file-signature" },
-                { text: "B2B Sales", color: "sky", icon: "fa-building-columns" }, 
-                { text: "ROI Modeling", color: "emerald", icon: "fa-magnifying-glass-chart" }
+                { text: "Partner Launches", color: "emerald", icon: "fa-handshake" }, 
+                { text: "Power BI Models", color: "sky", icon: "fa-chart-simple" }, 
+                { text: "Pitch Portfolios", color: "amber", icon: "fa-chalkboard-user" }, 
+                { text: "Legal Structuring", color: "rose", icon: "fa-file-signature" },
+                { text: "B2B Sales Funnels", color: "sky", icon: "fa-building-columns" }, 
+                { text: "ROI Analysis", color: "emerald", icon: "fa-magnifying-glass-chart" }
             ];
 
+            const radius = window.innerWidth < 768 ? 130 : 180;
+
             dataPoints.forEach((point, i) => {
-                const radius = 180; // Distance from center
                 const angle = (i / dataPoints.length) * (2 * Math.PI);
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
@@ -559,20 +983,18 @@
                 node.className = `orbit-node`;
                 node.style.left = `calc(50% + ${x}px)`;
                 node.style.top = `calc(50% + ${y}px)`;
-                node.style.animationDelay = `${i * 0.15}s`;
+                node.style.animationDelay = `${i * 0.12}s`;
 
-                // Calculate explicit Tailwind classes for guaranteed rendering
                 let colorClasses = "";
-                if (point.color === "sky") colorClasses = "border-sky-500/60 text-sky-300 shadow-[0_0_10px_rgba(14,165,233,0.3)] bg-slate-900/90";
-                if (point.color === "emerald") colorClasses = "border-emerald-500/60 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)] bg-slate-900/90";
-                if (point.color === "purple") colorClasses = "border-purple-500/60 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.3)] bg-slate-900/90";
-                if (point.color === "amber") colorClasses = "border-amber-500/60 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.3)] bg-slate-900/90";
-                if (point.color === "rose") colorClasses = "border-rose-500/60 text-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.3)] bg-slate-900/90";
+                if (point.color === "sky") colorClasses = "border-sky-500/60 text-sky-300 shadow-[0_0_10px_rgba(14,165,233,0.25)] bg-[#050b14]/95";
+                if (point.color === "emerald") colorClasses = "border-emerald-500/60 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.25)] bg-[#050b14]/95";
+                if (point.color === "purple") colorClasses = "border-purple-500/60 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.25)] bg-[#050b14]/95";
+                if (point.color === "amber") colorClasses = "border-amber-500/60 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.25)] bg-[#050b14]/95";
+                if (point.color === "rose") colorClasses = "border-rose-500/60 text-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.25)] bg-[#050b14]/95";
 
-                // Wrapper to reverse the spin so text stays readable
                 const content = document.createElement('div');
-                content.className = `orbit-node-content flex items-center gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur text-[10px] font-mono font-bold whitespace-nowrap cursor-default transition-transform hover:scale-110 ${colorClasses}`;
-                content.innerHTML = `<i class="fa-solid ${point.icon} opacity-80 text-[11px]"></i><span>${point.text}</span>`;
+                content.className = `orbit-node-content flex items-center gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur text-[9px] font-mono font-bold whitespace-nowrap cursor-default transition-transform hover:scale-110 ${colorClasses}`;
+                content.innerHTML = `<i class="fa-solid ${point.icon} opacity-80 text-[10px]"></i><span>${point.text}</span>`;
                 
                 node.appendChild(content);
                 container.appendChild(node);
@@ -581,132 +1003,237 @@
 
         function renderHUDMatches() {
             const container = document.getElementById('hud-container');
+            if(!container) return;
             container.innerHTML = '';
             
             matchData.forEach((data, index) => {
                 const row = document.createElement('div');
-                row.className = 'hud-row flex items-stretch bg-slate-800/40 border border-slate-700/50 rounded-lg p-3 hover:bg-slate-800/80 transition-colors relative overflow-hidden';
+                row.className = 'hud-row flex items-stretch bg-slate-900/40 border border-slate-850 rounded-lg p-3 hover:bg-slate-900/80 transition-colors relative overflow-hidden';
                 
                 row.innerHTML = `
-                    <!-- Job Req Left -->
-                    <div class="w-[45%] pr-4 flex flex-col justify-center border-r border-slate-700/50">
-                        <div class="text-sm text-slate-200 font-medium flex items-start gap-3">
+                    <div class="w-[45%] pr-4 flex flex-col justify-center border-r border-slate-800">
+                        <div class="text-xs lg:text-sm text-slate-200 font-medium flex items-start gap-3">
                             <i class="fa-solid ${data.icon} text-sky-500 mt-1 w-4 text-center"></i>
-                            <span>${data.req}</span>
+                            <span class="hud-req-text">${data.req}</span>
                         </div>
                     </div>
-
-                    <!-- Connection Bridge -->
                     <div class="w-[10%] flex items-center justify-center relative">
-                        <div class="w-full absolute top-1/2 left-0 h-px bg-slate-700 -z-10"></div>
+                        <div class="w-full absolute top-1/2 left-0 h-px bg-slate-800 -z-10"></div>
                         <div class="hud-line absolute top-1/2 left-0 -z-10"></div>
-                        <div class="w-6 h-6 rounded-full bg-[#050b14] border border-emerald-500 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)] z-10 text-xs">
+                        <div class="w-5 h-5 rounded-full bg-[#050b14] border border-emerald-500 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)] z-10 text-[10px]">
                             <i class="fa-solid fa-check"></i>
                         </div>
                     </div>
-
-                    <!-- CV Extraction Right -->
-                    <div class="w-[45%] pl-4 flex flex-col justify-center border-l border-slate-700/50 text-right">
-                        <div class="text-sm text-slate-300 font-light">
+                    <div class="w-[45%] pl-4 flex flex-col justify-center border-l border-slate-800 text-right">
+                        <div class="text-xs lg:text-sm text-slate-400 font-light font-sans hud-val-text">
                             ${data.cv}
                         </div>
                     </div>
                 `;
-                
                 container.appendChild(row);
 
-                // Cascade entry
                 setTimeout(() => {
                     row.classList.add('active');
-                }, 400 + (index * 400));
+                }, 300 + (index * 300));
             });
 
-            setTimeout(animateGauge, 600);
+            setTimeout(animateGauge, 450);
         }
 
         function animateGauge() {
             const gauge = document.getElementById('match-gauge');
             const pctText = document.getElementById('match-pct');
-            
-            // Total matches count
             const total = matchData.length;
             let current = 0;
             
-            // Increment gauge tied to row rendering
             const interval = setInterval(() => {
                 if (current >= total) {
                     clearInterval(interval);
-                    gauge.setAttribute('stroke-dasharray', `100, 100`);
-                    pctText.innerText = `100%`;
-                    pctText.classList.add('drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]');
+                    if(gauge) gauge.setAttribute('stroke-dasharray', `100, 100`);
+                    if(pctText) {
+                        pctText.innerText = `100%`;
+                        pctText.classList.add('drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]');
+                    }
                 } else {
                     current++;
                     const pct = Math.floor((current / total) * 100);
-                    gauge.setAttribute('stroke-dasharray', `${pct}, 100`);
-                    pctText.innerText = `${pct}%`;
+                    if(gauge) gauge.setAttribute('stroke-dasharray', `${pct}, 100`);
+                    if(pctText) pctText.innerText = `${pct}%`;
                 }
-            }, 400); // matches row cascade timing
+            }, 300);
         }
 
         async function runTerminalSequence() {
             const term = document.getElementById('terminal-output');
+            if(!term) return;
             term.innerHTML = '';
             
             const lines = [
                 "> INITIALIZING DELEGATED_AUTHORITY_BIND.SH",
-                "> Fetching Underwriter 3D Rules configuration...",
-                "[OK] Rules loaded. 9 critical parameters defined.",
-                "> Correlating Samuel_Oliver variables against requirements...",
-                "[OK] Match verification successful. Confidence: 100%",
-                "> Executing smart contract compilation...",
-                "[OK] Legal compliance framework validated.",
-                "> Binding risk exchange...",
+                "> Querying candidate alignment structures...",
+                "[OK] Operational profile loaded. 9 parameters mapped.",
+                "> Correlating variables against COO requirements...",
+                "[OK] Profile match compiled. Confidence: 100%",
+                "> Bundling exchange specifications...",
+                "[OK] Strategy structures validated.",
+                "> Finalising authority contract execution...",
                 "> SUCCESS: Contract Bound."
             ];
 
             for(let i=0; i<lines.length; i++) {
                 const p = document.createElement('div');
-                p.className = "opacity-0 transform translate-y-2 transition-all duration-300";
+                p.className = "opacity-0 transform translate-y-1 transition-all duration-300 text-[11px] font-mono";
                 
-                // Color formatting
                 let text = lines[i];
-                if(text.includes("[OK]")) text = text.replace("[OK]", "<span class='text-emerald-500 font-bold'>[OK]</span>");
-                if(text.includes("SUCCESS")) text = text.replace("SUCCESS", "<span class='text-emerald-400 font-bold drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]'>SUCCESS</span>");
+                if(text.includes("[OK]")) text = text.replace("[OK]", "<span class='text-emerald-450 font-bold'>[OK]</span>");
+                if(text.includes("SUCCESS")) text = text.replace("SUCCESS", "<span class='text-emerald-450 font-bold drop-shadow-[0_0_5px_rgba(16,185,129,0.6)]'>SUCCESS</span>");
                 
                 p.innerHTML = text;
                 term.appendChild(p);
 
-                await new Promise(r => setTimeout(r, 100)); // slight pause before revealing
-                p.classList.remove('opacity-0', 'translate-y-2');
+                await new Promise(r => setTimeout(r, 80));
+                p.classList.remove('opacity-0', 'translate-y-1');
                 
-                await new Promise(r => setTimeout(r, 400 + Math.random() * 400)); // Variable typing speed
+                await new Promise(r => setTimeout(r, 250 + Math.random() * 300));
             }
 
-            // Trigger the stamp after terminal is done
             setTimeout(() => {
-                document.getElementById('auth-stamp').classList.add('active');
+                const authStamp = document.getElementById('auth-stamp');
+                const ctaSection = document.getElementById('cta-section');
+                if(authStamp) authStamp.classList.add('active');
+                if(ctaSection) {
+                    ctaSection.classList.remove('hidden');
+                    ctaSection.scrollIntoView({ behavior: 'smooth' });
+                }
             }, 300);
         }
-
-        // Add tailwind keyframe inline for button shine
-        document.head.insertAdjacentHTML('beforeend', `<style>
-            @keyframes shine { 100% { transform: skewX(-12deg) translateX(150%); } }
-        </style>`);
 
         function nextPhase() {
             if (currentPhase < 4) {
                 currentPhase++;
             } else {
                 currentPhase = 1; 
-                hudRendered = false; // Reset to re-trigger animations
+                hudRendered = false;
                 orbitRendered = false;
-                document.getElementById('orbital-graph').innerHTML = '';
+                const graph = document.getElementById('orbital-graph');
+                if(graph) graph.innerHTML = '';
             }
             updateUI();
         }
 
-        // Initialize UI
-        window.onload = () => {
+        // -----------------------------------------------------
+        // Dark / Light Mode Toggle System Implementation
+        // -----------------------------------------------------
+        function toggleTheme() {
+            const body = document.body;
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            const themeText = document.getElementById('theme-text');
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            
+            body.classList.toggle('light-mode');
+            
+            const isLight = body.classList.contains('light-mode');
+            if (isLight) {
+                // Change UI icons
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                themeText.innerText = "Dark Mode";
+                
+                // Adjust direct colors of specific static content blocks
+                document.getElementById('hero-title').classList.add('text-slate-900');
+                document.getElementById('hero-title').classList.remove('text-white');
+                document.getElementById('sec-1-title').classList.add('text-slate-900');
+                document.getElementById('sec-1-title').classList.remove('text-white');
+                document.getElementById('sec-2-title').classList.add('text-slate-900');
+                document.getElementById('sec-2-title').classList.remove('text-white');
+                
+                // Change contact cards to elegant dark gray borders
+                document.getElementById('profile-name').classList.add('text-slate-900');
+                document.getElementById('profile-name').classList.remove('text-white');
+                
+                // Change core strength labels
+                document.getElementById('strength-1-title').classList.add('text-slate-900');
+                document.getElementById('strength-1-title').classList.remove('text-white');
+                document.getElementById('strength-2-title').classList.add('text-slate-900');
+                document.getElementById('strength-2-title').classList.remove('text-white');
+                document.getElementById('strength-3-title').classList.add('text-slate-900');
+                document.getElementById('strength-3-title').classList.remove('text-white');
+                document.getElementById('strength-4-title').classList.add('text-slate-900');
+                document.getElementById('strength-4-title').classList.remove('text-white');
+
+                // Adjust terminal background styles smoothly
+                document.getElementById('terminal-wrapper').style.background = '#f1f5f9';
+                document.getElementById('terminal-wrapper').style.borderColor = '#cbd5e1';
+                document.getElementById('terminal-sidebar-el').style.background = '#e2e8f0';
+                document.getElementById('terminal-sidebar-el').style.borderColor = '#cbd5e1';
+                
+                // Adjust terminal active text nodes and profile cards inside the console
+                document.getElementById('terminal-profile-card').style.background = '#f8fafc';
+                document.getElementById('terminal-profile-card').style.borderColor = '#e2e8f0';
+                document.querySelectorAll('.nav-step span').forEach(el => el.classList.add('text-slate-800'));
+
+                // Change SVG background dynamically
+                document.getElementById('svg-container').style.background = '#f8fafc';
+                document.getElementById('svg-container').style.borderColor = '#cbd5e1';
+
+                // Synchronise dynamic description panel if present
+                document.getElementById('diagram-info-panel').style.background = 'rgba(255, 255, 255, 0.9)';
+                document.getElementById('diagram-info-panel').style.borderColor = '#cbd5e1';
+                document.getElementById('panel-title').style.color = '#0f172a';
+                document.getElementById('panel-desc-bold').style.color = '#0f172a';
+                applyThemeStylesToPanel();
+
+            } else {
+                // Change UI icons
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                themeText.innerText = "Light Mode";
+                
+                // Restore direct colors
+                document.getElementById('hero-title').classList.remove('text-slate-900');
+                document.getElementById('hero-title').classList.add('text-white');
+                document.getElementById('sec-1-title').classList.remove('text-slate-900');
+                document.getElementById('sec-1-title').classList.add('text-white');
+                document.getElementById('sec-2-title').classList.remove('text-slate-900');
+                document.getElementById('sec-2-title').classList.add('text-white');
+                
+                document.getElementById('profile-name').classList.remove('text-slate-900');
+                document.getElementById('profile-name').classList.add('text-white');
+                
+                document.getElementById('strength-1-title').classList.remove('text-slate-900');
+                document.getElementById('strength-1-title').classList.add('text-white');
+                document.getElementById('strength-2-title').classList.remove('text-slate-900');
+                document.getElementById('strength-2-title').classList.add('text-white');
+                document.getElementById('strength-3-title').classList.remove('text-slate-900');
+                document.getElementById('strength-3-title').classList.add('text-white');
+                document.getElementById('strength-4-title').classList.remove('text-slate-900');
+                document.getElementById('strength-4-title').classList.add('text-white');
+
+                // Restore terminal wrapper backgrounds
+                document.getElementById('terminal-wrapper').style.background = '#070d19/90';
+                document.getElementById('terminal-wrapper').style.borderColor = '';
+                document.getElementById('terminal-sidebar-el').style.background = '#0d1626/90';
+                document.getElementById('terminal-sidebar-el').style.borderColor = '';
+                
+                document.getElementById('terminal-profile-card').style.background = '';
+                document.getElementById('terminal-profile-card').style.borderColor = '';
+                document.querySelectorAll('.nav-step span').forEach(el => el.classList.remove('text-slate-800'));
+
+                // Restore SVG background
+                document.getElementById('svg-container').style.background = '';
+                document.getElementById('svg-container').style.borderColor = '';
+
+                // Restore dynamic description panel
+                document.getElementById('diagram-info-panel').style.background = '';
+                document.getElementById('diagram-info-panel').style.borderColor = '';
+                document.getElementById('panel-title').style.color = '';
+                document.getElementById('panel-desc-bold').style.color = '';
+            }
+        }
+
+        // Initialize UI Elements
+        window.onload = function() {
             updateUI();
         };
     </script>
