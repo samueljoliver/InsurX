@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InsurX Commercial Strategy & Alignment Playbook - Samuel Oliver</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Google Fonts (Inter, Outfit, JetBrains Mono) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Custom Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -216,8 +220,10 @@
 </head>
 <body id="dashboard-wrapper" class="font-sans antialiased min-h-screen custom-scrollbar pb-16">
 
+    <!-- HEADER & HERO SECTION -->
     <header class="border-b border-slate-800/60 relative overflow-hidden backdrop-blur-sm z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- Status Badges -->
             <div class="flex justify-between items-center mb-6">
                 <div class="flex flex-wrap items-center gap-3">
                     <span class="bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider">COO Strategy Presentation</span>
@@ -237,6 +243,7 @@
                     </p>
                 </div>
                 
+                <!-- Quick Contact Card -->
                 <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 shadow-2xl self-start lg:self-auto border border-slate-700/50">
                     <div class="bg-gradient-to-br from-sky-500 to-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
                         SO
@@ -262,6 +269,7 @@
                 </div>
             </div>
 
+            <!-- CORE STRENGTHS -->
             <div class="mt-8">
                 <h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest font-mono mb-4">Core Strengths</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -300,6 +308,7 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 z-20 relative">
 
+        <!-- SECTION 1: VISUAL BUSINESS MODEL MAP -->
         <section class="glass-panel rounded-3xl p-6 md:p-8 border border-slate-800 relative">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
                 <div>
@@ -312,14 +321,17 @@
                 </div>
                 <div class="flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 border border-slate-800 px-3 py-1.5 rounded-lg self-start">
                     <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
-                    <i class="fa-solid fa-hand-pointer text- text-sky-400"></i> Tap nodes to explore functions
+                    <i class="fa-solid fa-hand-pointer text-[10px] text-sky-400"></i> Tap nodes to explore functions
                 </div>
             </div>
 
+            <!-- INTERACTIVE DIAGRAM CANVAS -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                 
+                <!-- Dynamic Dual Diagram Container (SVG for desktop, Vertical Flex for mobile) -->
                 <div class="lg:col-span-8 bg-slate-950/80 p-6 rounded-2xl border border-slate-900 shadow-inner flex justify-center items-center relative overflow-hidden" id="diagram-container">
                     
+                    <!-- DESKTOP / TABLET SVG DIAGRAM -->
                     <svg id="ecosystem-svg" viewBox="0 0 800 450" class="w-full h-auto hidden md:block" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -345,6 +357,7 @@
                             </marker>
                         </defs>
 
+                        <!-- Grid Background -->
                         <g opacity="0.04">
                             <line x1="100" y1="0" x2="100" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
                             <line x1="200" y1="0" x2="200" y2="450" stroke="#ffffff" stroke-dasharray="5,5" />
@@ -355,17 +368,20 @@
                             <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-dasharray="5,5" />
                         </g>
 
+                        <!-- FLOW PIPELINES -->
                         <path id="path-broker-to-exchange" d="M 180 180 Q 290 150 400 180" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-blue)"/>
                         <path id="path-exchange-to-broker" d="M 400 220 Q 290 250 180 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
 
                         <path id="path-insurer-to-exchange" d="M 620 180 Q 510 150 400 180" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
                         <path id="path-exchange-to-insurer" d="M 400 220 Q 510 250 620 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
 
+                        <!-- Custom Flow paths routing deeply into the network nodes -->
                         <path id="path-broker-to-insights" d="M 110 240 C 110 324, 200 324, 300 324" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
                         <path id="path-insurer-to-insights" d="M 690 240 C 690 324, 600 324, 500 324" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
                         <path id="path-insights-to-exchange" d="M 380 300 L 380 277" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
                         <path id="path-exchange-to-insights" d="M 420 277 L 420 300" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
 
+                        <!-- Glowing Animated Flow Packets -->
                         <circle r="5" fill="#60a5fa" class="flow-packet" style="offset-path: path('M 180 180 Q 290 150 400 180');" />
                         <circle r="4" fill="#a5f3fc" class="flow-packet" style="offset-path: path('M 400 220 Q 290 250 180 220'); animation-delay: 2s;" />
                         <circle r="5" fill="#2dd4bf" class="flow-packet" style="offset-path: path('M 620 180 Q 510 150 400 180');" />
@@ -376,6 +392,7 @@
                         <circle r="4" fill="#f97316" class="flow-packet" style="offset-path: path('M 380 300 L 380 277'); animation-duration: 2s; animation-delay: 1s;" />
                         <circle r="4" fill="#fb923c" class="flow-packet" style="offset-path: path('M 420 277 L 420 300'); animation-duration: 2s; animation-delay: 3s;" />
 
+                        <!-- MODULE: CENTRAL EXCHANGE -->
                         <g id="svg-exchange" class="cursor-pointer group select-none svg-node-hover" onclick="showPlatformDetails()">
                             <circle cx="400" cy="200" r="70" fill="url(#glowGrad)" stroke="#3b82f6" stroke-width="2" class="transition-all duration-300 group-hover:stroke-blue-400" />
                             <circle cx="400" cy="200" r="77" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,10" />
@@ -383,12 +400,14 @@
                             <text x="400" y="215" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#38bdf8" text-anchor="middle">EXCHANGE ENGINE</text>
                         </g>
 
+                        <!-- MODULE: MARKET INSIGHTS -->
                         <g id="svg-insights" class="cursor-pointer group select-none svg-node-hover" onclick="showInsightsDetails()">
                             <rect x="300" y="300" width="200" height="48" rx="12" fill="#0b1329" stroke="#ea580c" stroke-width="1.5" />
                             <text x="400" y="321" font-family="Outfit" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Market Insights Platform</text>
                             <text x="400" y="336" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#ea580c" text-anchor="middle">Data Sourcing</text>
                         </g>
 
+                        <!-- MODULE: BROKERS (DEMAND) -->
                         <g id="svg-brokers" class="cursor-pointer group select-none svg-node-hover" onclick="showBrokerDetails()">
                             <rect x="40" y="140" width="140" height="100" rx="16" fill="url(#blueGrad)" stroke="#60a5fa" stroke-width="1.5" />
                             <rect x="55" y="125" width="110" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
@@ -398,57 +417,69 @@
                             <text x="110" y="225" font-family="Outfit" font-size="9" fill="#e0f2fe" text-anchor="middle">Demand & Risk Sourcing</text>
                         </g>
 
+                        <!-- MODULE: INSURERS (SUPPLY) -->
                         <g id="svg-insurers" class="cursor-pointer group select-none svg-node-hover" onclick="showInsurerDetails()">
                             <rect x="620" y="140" width="140" height="100" rx="16" fill="url(#tealGrad)" stroke="#2dd4bf" stroke-width="1.5" />
                             <rect x="625" y="125" width="130" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
                             <text x="690" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#2dd4bf" text-anchor="middle">22 Follow Underwriters</text>
-                            <text x="690" y="180" font-family="Outfit" font-size="24" fill="#ffffff" text-anchor="middle">🛡</text>
+                            <text x="690" y="180" font-family="Outfit" font-size="24" fill="#ffffff" text-anchor="middle">🛡️</text>
                             <text x="690" y="210" font-family="Outfit" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">INSURERS</text>
                             <text x="690" y="225" font-family="Outfit" font-size="9" fill="#f0fdfa" text-anchor="middle">Delegated Capital Capacity</text>
                         </g>
 
+                        <!-- Inline labels -->
                         <text x="290" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#60a5fa" text-anchor="middle">Electronic Placement</text>
                         <text x="510" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#2dd4bf" text-anchor="middle">Authority Delegated</text>
                         <text x="290" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">$150m+ Placed</text>
                         <text x="510" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">Match Rules Applied</text>
                     </svg>
 
+                    <!-- MOBILE VERTICAL INTERACTIVE FLOW (Replaces SVG on smaller screens) -->
                     <div class="w-full flex flex-col items-center space-y-2 md:hidden py-6 relative">
+                        <!-- Connecting Line Background -->
                         <div class="absolute top-10 bottom-10 w-px bg-slate-800 -z-10 left-1/2 transform -translate-x-1/2"></div>
 
-                        <div id="mob-brokers" onclick="showBrokerDetails()" class="w-full max-w- rounded-2xl p-4 border border-blue-500/50 cursor-pointer transition-all duration-300 text-center bg-[#050b14] shadow-lg relative z-10">
+                        <!-- Mobile Node: Brokers -->
+                        <div id="mob-brokers" onclick="showBrokerDetails()" class="w-full max-w-[280px] rounded-2xl p-4 border border-blue-500/50 cursor-pointer transition-all duration-300 text-center bg-[#050b14] shadow-lg relative z-10">
                             <div class="text-2xl mb-1">🏢</div>
                             <div class="font-bold text-white text-md font-sans">BROKERS</div>
-                            <div class="text- text-blue-400 uppercase tracking-wider mt-0.5">Demand & Risk Sourcing</div>
+                            <div class="text-[9px] text-blue-400 uppercase tracking-wider mt-0.5">Demand & Risk Sourcing</div>
                         </div>
 
+                        <!-- Arrow Down -->
                         <i class="fa-solid fa-angles-down text-blue-500 text-lg animate-bounce my-2 relative z-10 bg-slate-950 px-2"></i>
 
-                        <div id="mob-exchange" onclick="showPlatformDetails()" class="w-full max-w- rounded-2xl p-5 border border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.2)] cursor-pointer transition-all duration-300 text-center bg-[#071324] relative z-10">
+                        <!-- Mobile Node: InsurX Exchange -->
+                        <div id="mob-exchange" onclick="showPlatformDetails()" class="w-full max-w-[280px] rounded-2xl p-5 border border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.2)] cursor-pointer transition-all duration-300 text-center bg-[#071324] relative z-10">
                             <div class="font-extrabold text-white text-xl font-sans tracking-wide">InsurX</div>
-                            <div class="text- text-sky-400 font-mono tracking-widest mt-1">EXCHANGE ENGINE</div>
+                            <div class="text-[10px] text-sky-400 font-mono tracking-widest mt-1">EXCHANGE ENGINE</div>
                         </div>
 
+                        <!-- Double Arrows -->
                         <div class="flex items-center gap-2 bg-slate-950 px-2 my-2 relative z-10">
                             <i class="fa-solid fa-angle-up text-orange-500 text-lg animate-pulse"></i>
                             <i class="fa-solid fa-angle-down text-teal-500 text-lg animate-pulse"></i>
                         </div>
 
-                        <div id="mob-insights" onclick="showInsightsDetails()" class="w-full max-w- rounded-2xl p-4 border border-orange-500/50 cursor-pointer transition-all duration-300 text-center bg-[#1a0f05] shadow-lg relative z-10">
+                        <!-- Mobile Node: Insights -->
+                        <div id="mob-insights" onclick="showInsightsDetails()" class="w-full max-w-[280px] rounded-2xl p-4 border border-orange-500/50 cursor-pointer transition-all duration-300 text-center bg-[#1a0f05] shadow-lg relative z-10">
                             <div class="font-bold text-white text-md font-sans">Market Insights Platform</div>
-                            <div class="text- text-orange-400 font-mono mt-1 uppercase tracking-wider">Data Sourcing</div>
+                            <div class="text-[9px] text-orange-400 font-mono mt-1 uppercase tracking-wider">Data Sourcing</div>
                         </div>
 
+                        <!-- Arrow Down -->
                         <i class="fa-solid fa-angles-down text-teal-500 text-lg animate-bounce my-2 relative z-10 bg-slate-950 px-2"></i>
 
-                        <div id="mob-insurers" onclick="showInsurerDetails()" class="w-full max-w- rounded-2xl p-4 border border-teal-500/50 cursor-pointer transition-all duration-300 text-center bg-[#041210] shadow-lg relative z-10">
-                            <div class="text-2xl mb-1">🛡</div>
+                        <!-- Mobile Node: Insurers -->
+                        <div id="mob-insurers" onclick="showInsurerDetails()" class="w-full max-w-[280px] rounded-2xl p-4 border border-teal-500/50 cursor-pointer transition-all duration-300 text-center bg-[#041210] shadow-lg relative z-10">
+                            <div class="text-2xl mb-1">🛡️</div>
                             <div class="font-bold text-white text-md font-sans">INSURERS</div>
-                            <div class="text- text-teal-400 uppercase tracking-wider mt-0.5">Delegated Capital Capacity</div>
+                            <div class="text-[9px] text-teal-400 uppercase tracking-wider mt-0.5">Delegated Capital Capacity</div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Dynamic Sourcing Board -->
                 <div class="lg:col-span-4 flex flex-col justify-between">
                     <div id="diagram-info-panel" class="glass-panel p-6 rounded-2xl h-full flex flex-col justify-between border border-slate-800 scroll-mt-6">
                         <div>
@@ -460,6 +491,7 @@
                             </p>
                         </div>
 
+                        <!-- Manual Select Hooks -->
                         <div class="grid grid-cols-2 gap-2.5 mt-8">
                             <button onclick="showBrokerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-blue-500/5 hover:bg-blue-500/10 text-sky-400 rounded-xl text-left border border-blue-500/20 transition-all cursor-pointer hover:scale-105">
                                 <i class="fa-solid fa-building-user mr-1.5 text-blue-400"></i> Broker Sourcing
@@ -479,6 +511,7 @@
             </div>
         </section>
 
+        <!-- SECTION 2: INSURX OS TERMINAL -->
         <section class="space-y-6">
             <div>
                 <h2 class="text-2xl font-extrabold text-white flex items-center gap-2 font-sans" id="sec-2-title">
@@ -489,83 +522,90 @@
                 </p>
             </div>
 
-            <div id="terminal-wrapper" class="flex flex-col lg:flex-row h-auto min-h- lg:h- w-full rounded-2xl overflow-hidden border border-slate-800 shadow-[0_10px_50px_rgba(0,0,0,0.6)] relative z-10 bg-[#070d19]/90">
+            <!-- Terminal Wrapper (Fully Responsive Layout) -->
+            <div id="terminal-wrapper" class="flex flex-col lg:flex-row h-auto min-h-[950px] lg:h-[800px] w-full rounded-2xl overflow-hidden border border-slate-800 shadow-[0_10px_50px_rgba(0,0,0,0.6)] relative z-10 bg-[#070d19]/90">
                 
+                <!-- Sidebar (Step Timeline) - Responsive Stack: Top on Mobile, Left on Desktop -->
                 <aside id="terminal-sidebar-el" class="w-full lg:w-80 h-auto lg:h-full border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-col relative z-20 flex-shrink-0 bg-[#0d1626]/90 p-6 lg:p-0">
+                    <!-- Header inside Sidebar -->
                     <div class="pb-5 lg:p-6 border-b border-slate-850 flex items-center gap-4">
                         <div class="w-10 h-10 rounded-lg bg-sky-500/15 flex items-center justify-center border border-sky-500/40 text-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
                             <i class="fa-solid fa-bolt text-xl"></i>
                         </div>
                         <div>
                             <h1 class="text-lg lg:text-xl font-bold text-white tracking-wide">InsurX<span class="text-sky-400">OS</span></h1>
-                            <p class="text- uppercase font-mono text-slate-500 tracking-widest">Exchange Terminal</p>
+                            <p class="text-[10px] uppercase font-mono text-slate-500 tracking-widest">Exchange Terminal</p>
                         </div>
                     </div>
 
+                    <!-- Compact Candidate Profile -->
                     <div class="hidden lg:block p-6">
                         <div class="bg-[#050b14] border border-slate-800/80 rounded-xl p-4" id="terminal-profile-card">
-                            <div class="text- uppercase font-mono text-sky-400 mb-2 font-bold tracking-wider">Candidate Analysis</div>
+                            <div class="text-[10px] uppercase font-mono text-sky-400 mb-2 font-bold tracking-wider">Candidate Analysis</div>
                             <div class="flex items-center gap-3 mb-3">
                                 <div class="w-11 h-11 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 overflow-hidden relative shadow-[0_0_10px_rgba(14,165,233,0.15)] shrink-0">
                                     <img src="https://res.cloudinary.com/dgz07ilw7/image/upload/v1781548395/20250831_172820_awtxkc.jpg" alt="Samuel Oliver" class="w-full h-full object-cover absolute inset-0" onerror="this.src='https://placehold.co/100x100/1e293b/94a3b8?text=SO'">
                                 </div>
                                 <div>
                                     <h2 class="text-white font-semibold text-sm">Samuel Oliver</h2>
-                                    <p class="text- text-slate-400 font-mono">Commercial Associate</p>
+                                    <p class="text-[11px] text-slate-400 font-mono">Commercial Associate</p>
                                 </div>
                             </div>
-                            <div class="text- text-slate-400 leading-relaxed italic mb-3">
+                            <div class="text-[10px] text-slate-400 leading-relaxed italic mb-3">
                                 "Commercially-focused Product and Strategy Professional with 6 years at Visa, specialising in 0-to-1 FinTech product-to-market execution."
                             </div>
                             <div class="flex flex-wrap gap-1">
-                                <span class="px-2 py-0.5 rounded text- font-mono border border-sky-500/30 text-sky-300">FINTECH</span>
-                                <span class="px-2 py-0.5 rounded text- font-mono border border-emerald-500/30 text-emerald-300">PRODUCT GTM</span>
-                                <span class="px-2 py-0.5 rounded text- font-mono border border-amber-500/30 text-amber-300">DATA INSIGHTS</span>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono border border-sky-500/30 text-sky-300">FINTECH</span>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono border border-emerald-500/30 text-emerald-300">PRODUCT GTM</span>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono border border-amber-500/30 text-amber-300">DATA INSIGHTS</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Vertical Timeline -->
                     <nav class="flex-grow flex flex-col justify-center py-4 lg:p-6 lg:justify-start lg:mt-6">
                         <div class="relative pl-4 space-y-6 lg:space-y-8 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start">
-                            <div class="absolute left- top-4 bottom-4 w-px bg-slate-800 -z-10 hidden lg:block"></div>
-                            <div id="timeline-progress" class="absolute left- top-4 w-px bg-sky-500 shadow-[0_0_10px_#0ea5e9] transition-all duration-700 -z-10 hidden lg:block" style="height: 0%;"></div>
+                            <div class="absolute left-[23px] top-4 bottom-4 w-px bg-slate-800 -z-10 hidden lg:block"></div>
+                            <div id="timeline-progress" class="absolute left-[23px] top-4 w-px bg-sky-500 shadow-[0_0_10px_#0ea5e9] transition-all duration-700 -z-10 hidden lg:block" style="height: 0%;"></div>
 
                             <div class="nav-step flex items-center gap-4 relative cursor-pointer" data-step="1">
                                 <div class="step-dot w-3 h-3 rounded-full bg-sky-500 shadow-[0_0_10px_#0ea5e9] border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-1"></div>
                                 <div class="hidden md:block">
                                     <div class="text-xs lg:text-sm font-semibold text-white transition-colors" id="nav-title-1">Risk Submission</div>
-                                    <div class="text- font-mono text-sky-400" id="nav-sub-1">Ingesting CV</div>
+                                    <div class="text-[9px] font-mono text-sky-400" id="nav-sub-1">Ingesting CV</div>
                                 </div>
                             </div>
                             <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="2">
                                 <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-2"></div>
                                 <div class="hidden md:block">
                                     <div class="text-xs lg:text-sm font-medium text-slate-400 transition-colors" id="nav-title-2">Data Extraction</div>
-                                    <div class="text- font-mono text-slate-500" id="nav-sub-2">Parsing credentials</div>
+                                    <div class="text-[9px] font-mono text-slate-500" id="nav-sub-2">Parsing credentials</div>
                                 </div>
                             </div>
                             <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="3">
                                 <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-3"></div>
                                 <div class="hidden md:block">
                                     <div class="text-xs lg:text-sm font-medium text-slate-400 transition-colors" id="nav-title-3">3D Rules Matching</div>
-                                    <div class="text- font-mono text-slate-500" id="nav-sub-3">Checking requirements</div>
+                                    <div class="text-[9px] font-mono text-slate-500" id="nav-sub-3">Checking requirements</div>
                                 </div>
                             </div>
                             <div class="nav-step flex items-center gap-4 relative opacity-50" data-step="4">
                                 <div class="step-dot w-3 h-3 rounded-full bg-slate-700 border-2 border-[#050b14] transition-all duration-300 z-10" id="dot-4"></div>
                                 <div class="hidden md:block">
                                     <div class="text-xs lg:text-sm font-medium text-slate-400 transition-colors" id="nav-title-4">Delegated Binding</div>
-                                    <div class="text- font-mono text-slate-500" id="nav-sub-4">Contract execution</div>
+                                    <div class="text-[9px] font-mono text-slate-500" id="nav-sub-4">Contract execution</div>
                                 </div>
                             </div>
                         </div>
                     </nav>
                 </aside>
 
-                <main class="flex-grow flex flex-col relative overflow-hidden h- lg:h-full z-10" id="terminal-main-window">
+                <!-- Main Content Area -->
+                <main class="flex-grow flex flex-col relative overflow-hidden h-[600px] lg:h-full z-10" id="terminal-main-window">
                     
                     <div class="flex-grow relative w-full h-full p-6 lg:p-8 flex items-center justify-center">
 
+                        <!-- STAGE 1: Risk Submission (Uplink) -->
                         <section id="stage-1" class="absolute inset-0 flex items-center justify-center transition-opacity duration-500">
                             <div class="w-full max-w-xl text-center flex flex-col items-center p-4">
                                 <div class="mb-6 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">Incoming Transmission</div>
@@ -574,10 +614,10 @@
                                     <div class="scan-bar"></div>
                                     <i class="fa-solid fa-file-pdf text-5xl text-sky-500 mb-4 drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"></i>
                                     <h3 class="font-bold text-white text-sm tracking-wide">01 Samuel Oliver CV.docx</h3>
-                                    <p class="text- text-amber-500 font-mono mt-2 border border-amber-500/50 bg-amber-500/10 px-2.5 py-0.5 rounded uppercase">Unstructured Document</p>
+                                    <p class="text-[10px] text-amber-500 font-mono mt-2 border border-amber-500/50 bg-amber-500/10 px-2.5 py-0.5 rounded uppercase">Unstructured Document</p>
                                     
                                     <div class="absolute bottom-6 w-3/4">
-                                        <div class="flex justify-between text- font-mono text-sky-400 mb-1">
+                                        <div class="flex justify-between text-[9px] font-mono text-sky-400 mb-1">
                                             <span>PARSING APPLICANT</span>
                                             <span id="uplink-pct">100%</span>
                                         </div>
@@ -590,18 +630,21 @@
                             </div>
                         </section>
 
+                        <!-- STAGE 2: Data Extraction (Orbital Graph) -->
                         <section id="stage-2" class="absolute inset-0 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500">
                             <div class="mb-4 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">Extracting Target Variable Nodes</div>
                             
-                            <div class="relative flex items-center justify-center w-full max-w-3xl h-">
+                            <div class="relative flex items-center justify-center w-full max-w-3xl h-[450px]">
                                 <div class="absolute z-20 w-20 h-20 rounded-full bg-sky-950/80 border-2 border-sky-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(14,165,233,0.4)] backdrop-blur">
                                     <i class="fa-solid fa-brain text-2xl text-sky-300 animate-pulse"></i>
                                 </div>
                                 <div class="orbital-container" id="orbital-graph">
-                                    </div>
+                                    <!-- Nodes injected dynamically via JS -->
+                                </div>
                             </div>
                         </section>
 
+                        <!-- STAGE 3: 3D Rules Matching (HUD Interface) -->
                         <section id="stage-3" class="absolute inset-0 flex flex-col hidden opacity-0 transition-opacity duration-500 px-6 lg:px-8 py-6">
                             
                             <div class="flex justify-between items-end mb-4 flex-shrink-0">
@@ -617,21 +660,23 @@
                                     </svg>
                                     <div class="text-center z-10">
                                         <div class="text-xl font-bold text-emerald-400 font-mono" id="match-pct">0%</div>
-                                        <div class="text- font-mono text-slate-500 uppercase">Match</div>
+                                        <div class="text-[8px] font-mono text-slate-500 uppercase">Match</div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="flex justify-between text- font-bold font-mono text-slate-500 uppercase tracking-widest pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
+                            <div class="flex justify-between text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
                                 <div class="w-[45%]">Required Capabilities</div>
                                 <div class="w-[10%] text-center">Verify</div>
                                 <div class="w-[45%] text-right">Extracted proof (from Samuel's CV)</div>
                             </div>
 
                             <div class="flex-grow overflow-y-auto custom-scrollbar pr-2 space-y-3" id="hud-container">
-                                </div>
+                                <!-- Rows injected via JS -->
+                            </div>
                         </section>
 
+                        <!-- STAGE 4: Delegated Binding (Contract & Stamp) -->
                         <section id="stage-4" class="absolute inset-0 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500 px-6 lg:px-8">
                             
                             <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center overflow-y-auto lg:overflow-visible">
@@ -641,10 +686,11 @@
                                         <div class="w-2 h-2 rounded-full bg-red-500"></div>
                                         <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
                                         <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                        <span class="text-slate-500 ml-2 text-">insurx_onboarding_protocol.sh</span>
+                                        <span class="text-slate-500 ml-2 text-[10px]">insurx_onboarding_protocol.sh</span>
                                     </div>
                                     <div class="mt-4 space-y-1.5" id="terminal-output">
-                                        </div>
+                                        <!-- Injected typing effect -->
+                                    </div>
                                 </div>
 
                                 <div class="relative flex justify-center items-center h-56 lg:h-80 select-none">
@@ -654,7 +700,7 @@
                                             <i class="fa-solid fa-file-signature text-slate-400 text-sm"></i>
                                         </div>
                                         <h5 class="text-xs font-bold mb-1 text-center font-mono text-slate-900 uppercase tracking-wider">MEMBER CONTRACT</h5>
-                                        <p class="text- text-center text-slate-500 mb-4 font-sans font-light">Commercial Associate Onboarding</p>
+                                        <p class="text-[10px] text-center text-slate-500 mb-4 font-sans font-light">Commercial Associate Onboarding</p>
                                         
                                         <div class="space-y-1.5 flex-grow">
                                             <div class="h-1.5 w-full bg-slate-200 rounded"></div>
@@ -664,16 +710,16 @@
                                         </div>
 
                                         <div class="mt-4 flex justify-between items-end border-t border-slate-200 pt-2">
-                                            <div class="border-t border-slate-400 w-20 pt-1 text- text-center font-mono">Samuel Oliver</div>
-                                            <div class="border-t border-slate-400 w-20 pt-1 text- text-center font-mono">COO / InsurX</div>
+                                            <div class="border-t border-slate-400 w-20 pt-1 text-[7px] text-center font-mono">Samuel Oliver</div>
+                                            <div class="border-t border-slate-400 w-20 pt-1 text-[7px] text-center font-mono">COO / InsurX</div>
                                         </div>
                                     </div>
 
                                     <div id="auth-stamp" class="stamp-final absolute inset-0 flex items-center justify-center pointer-events-none">
                                         <div class="relative">
                                             <div class="absolute inset-0 bg-emerald-500 blur-xl opacity-30 rounded-full animate-ping"></div>
-                                            <div class="border- border-emerald-500 text-emerald-500 px-5 py-3 rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.5)] backdrop-blur-sm bg-slate-900/90 transform flex flex-col items-center">
-                                                <span class="text- font-mono tracking-[0.2em] uppercase mb-0.5" id="stamp-tag-el">Delegated Authority</span>
+                                            <div class="border-[4px] border-emerald-500 text-emerald-500 px-5 py-3 rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.5)] backdrop-blur-sm bg-slate-900/90 transform flex flex-col items-center">
+                                                <span class="text-[9px] font-mono tracking-[0.2em] uppercase mb-0.5" id="stamp-tag-el">Delegated Authority</span>
                                                 <span class="text-3xl font-extrabold tracking-widest font-sans">BOUND</span>
                                             </div>
                                         </div>
@@ -683,6 +729,7 @@
                         </section>
                     </div>
 
+                    <!-- Narrative & Control Bottom Bar -->
                     <footer class="h-28 glass-panel border-t border-slate-800 px-6 lg:px-8 flex items-center justify-between z-20 flex-shrink-0 relative overflow-hidden bg-[#0d1626]/90">
                         <div class="absolute inset-0 bg-gradient-to-r from-sky-900/10 to-transparent pointer-events-none"></div>
                         
@@ -701,6 +748,7 @@
             </div>
         </section>
 
+        <!-- FINAL OUTCOME CONTAINER -->
         <section id="cta-section" class="glass-panel p-8 rounded-3xl border border-emerald-500/25 shadow-[0_0_50px_rgba(16,185,129,0.1)] text-center max-w-4xl mx-auto hidden mt-10">
             <div class="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-3xl mx-auto mb-4 animate-bounce">
                 <i class="fa-solid fa-handshake"></i>
@@ -710,16 +758,19 @@
                 Thank you for reviewing my strategy alignment playbook. With my technical operations and commercial execution background at Visa, I am ready to hit the ground running as InsurX's Commercial Associate.
             </p>
             <div class="flex flex-wrap justify-center gap-5 mt-8">
+                <!-- Schedule Conversation: Radiant Emerald Button -->
                 <a href="mailto:samueloliverj@gmail.com" class="relative group overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-mono font-bold text-xs py-3.5 px-7 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(16,185,129,0.25)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:-translate-y-1 flex items-center gap-2.5">
                     <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
                     <i class="fa-solid fa-envelope animate-pulse text-sm"></i> Schedule Conversation
                 </a>
                 
+                <!-- Contact LinkedIn: Royal Deep Blue Button -->
                 <a href="https://linkedin.com/in/samuel-oliver100" target="_blank" class="relative group overflow-hidden bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white font-mono font-bold text-xs py-3.5 px-7 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] hover:-translate-y-1 flex items-center gap-2.5">
                     <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
                     <i class="fa-brands fa-linkedin text-sm"></i> Contact on LinkedIn
                 </a>
                 
+                <!-- AI Portfolio: Cyber Violet Button -->
                 <a href="https://Samueljoliver.github.io/Samuel-Oliver-CV" target="_blank" class="relative group overflow-hidden bg-gradient-to-r from-purple-700 to-fuchsia-600 hover:from-purple-600 hover:to-fuchsia-500 text-white font-mono font-bold text-xs py-3.5 px-7 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(168,85,247,0.25)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] hover:-translate-y-1 flex items-center gap-2.5">
                     <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.6s]"></span>
                     <i class="fa-solid fa-globe text-sm group-hover:rotate-45 transition-transform duration-500"></i> Visit My AI Portfolio
@@ -787,8 +838,8 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Driving Broker Volumes';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>Automated CRM Email Routing:</strong> Configure an automated system so that the CRM automatically triggers an email to InsurX when a Lead insurance slip is uploaded to the broker's CRM/ project management platform.</li>
-                    <li><strong>Lead-Insurer Sourcing Pipeline:</strong> Pitch major lead underwriters to share unfulfilled capacity slips with InsurX before returning to the broker. If a lead can only cover 20% of a risk, they route the slip to us. We return a consolidated, fully-backed trade contract back to the lead. Allowing the lead to return a fully placed slip back to the broker by "subcontracting" outstanding risk to our follow underwriters and receiving the "Premium cashback" as incentive and to cover the small additional risk of default liability due to sub-contracting. The Issuer is also incentivised to do this as it reduces the risk of the slip becoming unfulfilled/ it increases the speed in which capacity is put to work. The lead may also simply return the slip to the broker with an InsurX follower fulfilment report. Through this the broker can see the value of InsurX acting as a marketing channel. This is of benefit to the lead as we may pay a referral fee for this and or the lead underwriter is more likely to fulfil slips as mentioned before. This sidesteps having to rely entirely on slower broker-by-broker acquisition.</li>
+                    <li><strong>Automated CRM Email Routing:</strong> Configure an automated system so that the CRM automatically triggers an email to InsurX when a Lead insurance slip is uploaded to the brokers CRM/ project management platform.</li>
+                    <li><strong>Lead-Insurer Sourcing Pipeline:</strong> Pitch major lead underwriters to share unfulfilled capacity slips with InsurX before returning to the broker. If a lead can only cover 20% of a risk, they route the slip to us. We return a consolidated, fully-backed trade contract back to the lead. Allowing the lead to return a fully placed slip back to the broker by "subcontracting" outstanding risk to our follow underwriters and receiving the "Premium cashback" as incentive and to cover the small additional risk of default liability due to sub-contracting. The Issuer is also incentivised to do this as it reduces the risk of the slip becoming unfulfilled/ it increases the speed in which capacity is put to work. The lead may also simply return to slip to the broker with a InsurX follower fulfilment report. Through this the broker can see the value of InsurX acting as a marketing channel. This is of benefit to the lead as we may pay a referral fee for this and or the lead underwriter is more likely to fulfill slips as mentioned before. This sidesteps having to rely entirely on slower broker-by-broker acquisition.</li>
                 </ul>
             `;
             scrollToPanel();
@@ -801,7 +852,7 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Sourcing Exchange Capacity';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>Contract Modularisation:</strong> Standardise the "delegated authority" variables to drastically cut negotiation cycles from months to weeks. Provide two contracts when onboarding, one that explains all the terms in English and the logic behind each term and then a clean contract that just has all the terms in the contract- which will help reduce queries and complete contracts more easily.</li>
+                    <li><strong>Contract Modularisation:</strong> Standardise the "delegated authority" variables to drastically cut negotiation cycles from months to weeks. Provide two contracts when onboarding, one that explains all the terms in English and the logic behind each term and then a clean contract that just has all the terms in the contract- which will help reduce questions/ queries and complete contracts more easily.</li>
                     <li><strong>Unfulfilled Risk Capacity:</strong> Extract data from platform risks that failed to bind. Present these quantified demand pipelines directly to prospective follow syndicates, showing real proven premium capacity they could serve.</li>
                 </ul>
             `;
@@ -815,7 +866,7 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Optimising Exchange Matches';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>InsurX-Branded Slip Summaries:</strong> Use the data extraction engine to return to the broker instantly a clear well structured summary of the insurance slip- this might be useful for them to use, we could brand this as InsurX and it would give the broker incentive to send us Insurance Slips to just get the breakdown summary as if we weren't able to fulfil certain slips then at least the broker got something out of it anyways- maybe we send it with the quote so in case the quote is not helpful or can't be fulfilled they get value and keep on sending slips.</li>
+                    <li><strong>InsurX-Branded Slip Summaries:</strong> Use the data extraction engine to return to the broker instantly a clear well structured summary of the insurance slip- this might be useful for them to use, we could brand this as InsurX and it would give the broker incentive to send us Insurance Slips to just get the breakdown summary as if we weren't able to fulfill certain slips then at least the broker got something out of it anyways- maybe we send it with the quote so in case the quote is not helpful or can't be fulfilled they get value and keep on sending slips.</li>
                     <li><strong>Premium and Claim Settlement network:</strong> Act as the network to pay premiums and settle claims- acting as the monetary settlement framework, InsurX adds value to all partners by providing a more seamless and faster payment settlement process while at the same time gaining valuable data on profitable business and claim frequency.</li>
                 </ul>
             `;
@@ -829,7 +880,7 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Data Sourcing & Analysis';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>Underutilised Capacity Analytics:</strong> Run analytics on the follow insurers who are underutilised to show them what risk parameters are meaning they miss out on insurance volume, and help them potentially adjust their risk parameters if they can see how much extra volume they would get.</li>
+                    <li><strong>Underutilised Capacity Analytics:</strong> Run analytics on the follow insurers who are under utilised so show them what risk parameters are meaning they miss out on insurance volume, so help they potentially adjust their risk parameters if they can see how much extra volume they would get.-</li>
                     <li><strong>Unfulfilled Risk Lead Prospecting:</strong> Use data where an insurance slip wasn't fulfilled to go to new lead underwriters to show them how much volume they could get from our system if they were willing to accept certain risks- it would help onboard new underwriters and also make for a higher fulfilled slip ratio.</li>
                     <li><strong>Broker Efficiency Benchmarking:</strong> Convert raw transactional telemetry into targeted scorecards showing brokers how their execution timing matches the platform averages, driving retention through performance indicators.</li>
                 </ul>
@@ -1018,8 +1069,8 @@
                 if (point.color === "rose") colorClasses = "border-rose-500/60 text-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.25)] bg-[#050b14]/95";
 
                 const content = document.createElement('div');
-                content.className = `orbit-node-content flex items-center gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur text- font-mono font-bold whitespace-nowrap cursor-default transition-transform hover:scale-110 ${colorClasses}`;
-                content.innerHTML = `<i class="fa-solid ${point.icon} opacity-80 text-"></i><span>${point.text}</span>`;
+                content.className = `orbit-node-content flex items-center gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur text-[9px] font-mono font-bold whitespace-nowrap cursor-default transition-transform hover:scale-110 ${colorClasses}`;
+                content.innerHTML = `<i class="fa-solid ${point.icon} opacity-80 text-[10px]"></i><span>${point.text}</span>`;
                 
                 node.appendChild(content);
                 container.appendChild(node);
@@ -1045,7 +1096,7 @@
                     <div class="w-[10%] flex items-center justify-center relative">
                         <div class="w-full absolute top-1/2 left-0 h-px bg-slate-800 -z-10"></div>
                         <div class="hud-line absolute top-1/2 left-0 -z-10"></div>
-                        <div class="w-5 h-5 rounded-full bg-[#050b14] border border-emerald-500 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)] z-10 text-">
+                        <div class="w-5 h-5 rounded-full bg-[#050b14] border border-emerald-500 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)] z-10 text-[10px]">
                             <i class="fa-solid fa-check"></i>
                         </div>
                     </div>
@@ -1107,7 +1158,7 @@
 
             for(let i=0; i<lines.length; i++) {
                 const p = document.createElement('div');
-                p.className = "opacity-0 transform translate-y-1 transition-all duration-300 text- font-mono";
+                p.className = "opacity-0 transform translate-y-1 transition-all duration-300 text-[11px] font-mono";
                 
                 let text = lines[i];
                 if(text.includes("[OK]")) text = text.replace("[OK]", "<span class='text-emerald-450 font-bold'>[OK]</span>");
