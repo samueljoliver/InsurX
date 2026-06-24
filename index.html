@@ -1012,4 +1012,144 @@
 
                 let colorClasses = "";
                 if (point.color === "sky") colorClasses = "border-sky-500/60 text-sky-300 shadow-[0_0_10px_rgba(14,165,233,0.25)] bg-[#050b14]/95";
-                if
+                if (point.color === "emerald") colorClasses = "border-emerald-500/60 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.25)] bg-[#050b14]/95";
+                if (point.color === "purple") colorClasses = "border-purple-500/60 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.25)] bg-[#050b14]/95";
+                if (point.color === "amber") colorClasses = "border-amber-500/60 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.25)] bg-[#050b14]/95";
+                if (point.color === "rose") colorClasses = "border-rose-500/60 text-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.25)] bg-[#050b14]/95";
+
+                const content = document.createElement('div');
+                content.className = `orbit-node-content flex items-center gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur text- font-mono font-bold whitespace-nowrap cursor-default transition-transform hover:scale-110 ${colorClasses}`;
+                content.innerHTML = `<i class="fa-solid ${point.icon} opacity-80 text-"></i><span>${point.text}</span>`;
+                
+                node.appendChild(content);
+                container.appendChild(node);
+            });
+        }
+
+        function renderHUDMatches() {
+            const container = document.getElementById('hud-container');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            matchData.forEach((data, index) => {
+                const row = document.createElement('div');
+                row.className = 'hud-row flex items-stretch bg-slate-900/40 border border-slate-850 rounded-lg p-3 hover:bg-slate-900/80 transition-colors relative overflow-hidden';
+                
+                row.innerHTML = `
+                    <div class="w-[45%] pr-4 flex flex-col justify-center border-r border-slate-800">
+                        <div class="text-xs lg:text-sm text-slate-200 font-medium flex items-start gap-3">
+                            <i class="fa-solid ${data.icon} text-sky-500 mt-1 w-4 text-center"></i>
+                            <span class="hud-req-text">${data.req}</span>
+                        </div>
+                    </div>
+                    <div class="w-[10%] flex items-center justify-center relative">
+                        <div class="w-full absolute top-1/2 left-0 h-px bg-slate-800 -z-10"></div>
+                        <div class="hud-line absolute top-1/2 left-0 -z-10"></div>
+                        <div class="w-5 h-5 rounded-full bg-[#050b14] border border-emerald-500 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)] z-10 text-">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="w-[45%] pl-4 flex flex-col justify-center border-l border-slate-800 text-right">
+                        <div class="text-xs lg:text-sm text-slate-400 font-light font-sans hud-val-text">
+                            ${data.cv}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+
+                setTimeout(() => {
+                    row.classList.add('active');
+                }, 300 + (index * 300));
+            });
+
+            setTimeout(animateGauge, 450);
+        }
+
+        function animateGauge() {
+            const gauge = document.getElementById('match-gauge');
+            const pctText = document.getElementById('match-pct');
+            const total = matchData.length;
+            let current = 0;
+            
+            const interval = setInterval(() => {
+                if (current >= total) {
+                    clearInterval(interval);
+                    if(gauge) gauge.setAttribute('stroke-dasharray', `100, 100`);
+                    if(pctText) {
+                        pctText.innerText = `100%`;
+                        pctText.classList.add('drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]');
+                    }
+                } else {
+                    current++;
+                    const pct = Math.floor((current / total) * 100);
+                    if(gauge) gauge.setAttribute('stroke-dasharray', `${pct}, 100`);
+                    if(pctText) pctText.innerText = `${pct}%`;
+                }
+            }, 300);
+        }
+
+        async function runTerminalSequence() {
+            const term = document.getElementById('terminal-output');
+            if(!term) return;
+            term.innerHTML = '';
+            
+            const lines = [
+                "> INITIALIZING DELEGATED_AUTHORITY_BIND.SH",
+                "> Querying candidate alignment structures...",
+                "[OK] Operational profile loaded. 9 parameters mapped.",
+                "> Correlating variables against COO requirements...",
+                "[OK] Profile match compiled. Confidence: 100%",
+                "> Bundling exchange specifications...",
+                "[OK] Strategy structures validated.",
+                "> Finalising authority contract execution...",
+                "> SUCCESS: Contract Bound."
+            ];
+
+            for(let i=0; i<lines.length; i++) {
+                const p = document.createElement('div');
+                p.className = "opacity-0 transform translate-y-1 transition-all duration-300 text- font-mono";
+                
+                let text = lines[i];
+                if(text.includes("[OK]")) text = text.replace("[OK]", "<span class='text-emerald-450 font-bold'>[OK]</span>");
+                if(text.includes("SUCCESS")) text = text.replace("SUCCESS", "<span class='text-emerald-450 font-bold drop-shadow-[0_0_5px_rgba(16,185,129,0.6)]'>SUCCESS</span>");
+                
+                p.innerHTML = text;
+                term.appendChild(p);
+
+                await new Promise(r => setTimeout(r, 80));
+                p.classList.remove('opacity-0', 'translate-y-1');
+                
+                await new Promise(r => setTimeout(r, 250 + Math.random() * 300));
+            }
+
+            setTimeout(() => {
+                const authStamp = document.getElementById('auth-stamp');
+                const ctaSection = document.getElementById('cta-section');
+                if(authStamp) authStamp.classList.add('active');
+                if(ctaSection) {
+                    ctaSection.classList.remove('hidden');
+                    ctaSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
+        }
+
+        function nextPhase() {
+            if (currentPhase < 4) {
+                currentPhase++;
+            } else {
+                currentPhase = 1; 
+                hudRendered = false;
+                orbitRendered = false;
+                const graph = document.getElementById('orbital-graph');
+                if(graph) graph.innerHTML = '';
+            }
+            updateUI();
+        }
+
+        // Initialize UI Elements
+        window.onload = function() {
+            updateUI();
+        };
+    </script>
+</body>
+</html>
