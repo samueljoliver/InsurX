@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InsurX Commercial Strategy & Alignment Playbook - Samuel Oliver</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts (Inter, Outfit, JetBrains Mono) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -80,6 +83,7 @@
                 linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
         .glass-panel {
@@ -88,6 +92,7 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: background 0.5s ease, border 0.5s ease;
         }
 
         /* SVG Glow and Highlight Effects */
@@ -101,7 +106,6 @@
             transition: all 0.3s ease;
         }
         
-        /* Tactile SVG Hover Pop Animation */
         .svg-node-hover {
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-box: fill-box;
@@ -109,7 +113,6 @@
         }
         .svg-node-hover:hover {
             transform: scale(1.04);
-            cursor: pointer;
         }
 
         /* Scan Line Animation */
@@ -217,6 +220,7 @@
 </head>
 <body id="dashboard-wrapper" class="font-sans antialiased min-h-screen custom-scrollbar pb-16">
 
+    <!-- HEADER & HERO SECTION -->
     <header class="border-b border-slate-800/60 relative overflow-hidden backdrop-blur-sm z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <!-- Status Badges -->
@@ -239,7 +243,7 @@
                     </p>
                 </div>
                 
-                <!-- Quick Contact Card (Enhanced Styling) -->
+                <!-- Quick Contact Card -->
                 <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 shadow-2xl self-start lg:self-auto border border-slate-700/50">
                     <div class="bg-gradient-to-br from-sky-500 to-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
                         SO
@@ -323,9 +327,12 @@
 
             <!-- INTERACTIVE DIAGRAM CANVAS -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                <!-- SVG Ecosystem Map -->
-                <div class="lg:col-span-8 bg-slate-950 p-6 rounded-2xl border border-slate-900/80 shadow-inner flex justify-center items-center overflow-x-auto overflow-y-hidden" id="svg-container">
-                    <svg id="ecosystem-svg" viewBox="0 0 800 450" class="w-full h-auto min-w-[600px] max-w-3xl" xmlns="http://www.w3.org/2000/svg">
+                
+                <!-- Dynamic Dual Diagram Container (SVG for desktop, Vertical Flex for mobile) -->
+                <div class="lg:col-span-8 bg-slate-950/80 p-6 rounded-2xl border border-slate-900 shadow-inner flex justify-center items-center relative overflow-hidden" id="diagram-container">
+                    
+                    <!-- DESKTOP / TABLET SVG DIAGRAM -->
+                    <svg id="ecosystem-svg" viewBox="0 0 800 450" class="w-full h-auto hidden md:block" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#3b82f6" />
@@ -361,14 +368,14 @@
                             <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-dasharray="5,5" />
                         </g>
 
-                        <!-- MAIN FLOW PIPELINES -->
+                        <!-- FLOW PIPELINES -->
                         <path id="path-broker-to-exchange" d="M 180 180 Q 290 150 400 180" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-blue)"/>
                         <path id="path-exchange-to-broker" d="M 400 220 Q 290 250 180 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
 
                         <path id="path-insurer-to-exchange" d="M 620 180 Q 510 150 400 180" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
                         <path id="path-exchange-to-insurer" d="M 400 220 Q 510 250 620 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-                        <!-- NEW DEEP ROUTING PATHS (To/From Insights and Exchange) -->
+                        <!-- Custom Flow paths routing deeply into the network nodes -->
                         <path id="path-broker-to-insights" d="M 110 240 C 110 324, 200 324, 300 324" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
                         <path id="path-insurer-to-insights" d="M 690 240 C 690 324, 600 324, 500 324" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
                         <path id="path-insights-to-exchange" d="M 380 300 L 380 277" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
@@ -380,14 +387,13 @@
                         <circle r="5" fill="#2dd4bf" class="flow-packet" style="offset-path: path('M 620 180 Q 510 150 400 180');" />
                         <circle r="4" fill="#ccfbf1" class="flow-packet" style="offset-path: path('M 400 220 Q 510 250 620 220'); animation-delay: 3s;" />
                         
-                        <!-- New data packets along the insights paths -->
                         <circle r="4" fill="#fed7aa" class="flow-packet" style="offset-path: path('M 110 240 C 110 324, 200 324, 300 324'); animation-duration: 4s;" />
                         <circle r="4" fill="#ffedd5" class="flow-packet" style="offset-path: path('M 690 240 C 690 324, 600 324, 500 324'); animation-duration: 4s; animation-delay: 2s;" />
                         <circle r="4" fill="#f97316" class="flow-packet" style="offset-path: path('M 380 300 L 380 277'); animation-duration: 2s; animation-delay: 1s;" />
                         <circle r="4" fill="#fb923c" class="flow-packet" style="offset-path: path('M 420 277 L 420 300'); animation-duration: 2s; animation-delay: 3s;" />
 
                         <!-- MODULE: CENTRAL EXCHANGE -->
-                        <g id="svg-exchange" class="svg-node-hover cursor-pointer group select-none" onclick="showPlatformDetails()">
+                        <g id="svg-exchange" class="cursor-pointer group select-none svg-node-hover" onclick="showPlatformDetails()">
                             <circle cx="400" cy="200" r="70" fill="url(#glowGrad)" stroke="#3b82f6" stroke-width="2" class="transition-all duration-300 group-hover:stroke-blue-400" />
                             <circle cx="400" cy="200" r="77" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,10" />
                             <text x="400" y="195" font-family="Outfit" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">InsurX</text>
@@ -395,14 +401,14 @@
                         </g>
 
                         <!-- MODULE: MARKET INSIGHTS -->
-                        <g id="svg-insights" class="svg-node-hover cursor-pointer group select-none" onclick="showInsightsDetails()">
+                        <g id="svg-insights" class="cursor-pointer group select-none svg-node-hover" onclick="showInsightsDetails()">
                             <rect x="300" y="300" width="200" height="48" rx="12" fill="#0b1329" stroke="#ea580c" stroke-width="1.5" />
                             <text x="400" y="321" font-family="Outfit" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Market Insights Platform</text>
                             <text x="400" y="336" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#ea580c" text-anchor="middle">Data Sourcing</text>
                         </g>
 
                         <!-- MODULE: BROKERS (DEMAND) -->
-                        <g id="svg-brokers" class="svg-node-hover cursor-pointer group select-none" onclick="showBrokerDetails()">
+                        <g id="svg-brokers" class="cursor-pointer group select-none svg-node-hover" onclick="showBrokerDetails()">
                             <rect x="40" y="140" width="140" height="100" rx="16" fill="url(#blueGrad)" stroke="#60a5fa" stroke-width="1.5" />
                             <rect x="55" y="125" width="110" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
                             <text x="110" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#60a5fa" text-anchor="middle">27 Broking Houses</text>
@@ -412,7 +418,7 @@
                         </g>
 
                         <!-- MODULE: INSURERS (SUPPLY) -->
-                        <g id="svg-insurers" class="svg-node-hover cursor-pointer group select-none" onclick="showInsurerDetails()">
+                        <g id="svg-insurers" class="cursor-pointer group select-none svg-node-hover" onclick="showInsurerDetails()">
                             <rect x="620" y="140" width="140" height="100" rx="16" fill="url(#tealGrad)" stroke="#2dd4bf" stroke-width="1.5" />
                             <rect x="625" y="125" width="130" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
                             <text x="690" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#2dd4bf" text-anchor="middle">22 Follow Underwriters</text>
@@ -424,9 +430,53 @@
                         <!-- Inline labels -->
                         <text x="290" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#60a5fa" text-anchor="middle">Electronic Placement</text>
                         <text x="510" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#2dd4bf" text-anchor="middle">Authority Delegated</text>
-                        <text x="290" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">$150m+ Placed (£118.5m+)</text>
+                        <text x="290" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">$150m+ Placed</text>
                         <text x="510" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">Match Rules Applied</text>
                     </svg>
+
+                    <!-- MOBILE VERTICAL INTERACTIVE FLOW (Replaces SVG on smaller screens) -->
+                    <div class="w-full flex flex-col items-center space-y-2 md:hidden py-6 relative">
+                        <!-- Connecting Line Background -->
+                        <div class="absolute top-10 bottom-10 w-px bg-slate-800 -z-10 left-1/2 transform -translate-x-1/2"></div>
+
+                        <!-- Mobile Node: Brokers -->
+                        <div id="mob-brokers" onclick="showBrokerDetails()" class="w-full max-w-[280px] rounded-2xl p-4 border border-blue-500/50 cursor-pointer transition-all duration-300 text-center bg-[#050b14] shadow-lg relative z-10">
+                            <div class="text-2xl mb-1">🏢</div>
+                            <div class="font-bold text-white text-md font-sans">BROKERS</div>
+                            <div class="text-[9px] text-blue-400 uppercase tracking-wider mt-0.5">Demand & Risk Sourcing</div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <i class="fa-solid fa-angles-down text-blue-500 text-lg animate-bounce my-2 relative z-10 bg-slate-950 px-2"></i>
+
+                        <!-- Mobile Node: InsurX Exchange -->
+                        <div id="mob-exchange" onclick="showPlatformDetails()" class="w-full max-w-[280px] rounded-2xl p-5 border border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.2)] cursor-pointer transition-all duration-300 text-center bg-[#071324] relative z-10">
+                            <div class="font-extrabold text-white text-xl font-sans tracking-wide">InsurX</div>
+                            <div class="text-[10px] text-sky-400 font-mono tracking-widest mt-1">EXCHANGE ENGINE</div>
+                        </div>
+
+                        <!-- Double Arrows -->
+                        <div class="flex items-center gap-2 bg-slate-950 px-2 my-2 relative z-10">
+                            <i class="fa-solid fa-angle-up text-orange-500 text-lg animate-pulse"></i>
+                            <i class="fa-solid fa-angle-down text-teal-500 text-lg animate-pulse"></i>
+                        </div>
+
+                        <!-- Mobile Node: Insights -->
+                        <div id="mob-insights" onclick="showInsightsDetails()" class="w-full max-w-[280px] rounded-2xl p-4 border border-orange-500/50 cursor-pointer transition-all duration-300 text-center bg-[#1a0f05] shadow-lg relative z-10">
+                            <div class="font-bold text-white text-md font-sans">Market Insights Platform</div>
+                            <div class="text-[9px] text-orange-400 font-mono mt-1 uppercase tracking-wider">Data Sourcing</div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <i class="fa-solid fa-angles-down text-teal-500 text-lg animate-bounce my-2 relative z-10 bg-slate-950 px-2"></i>
+
+                        <!-- Mobile Node: Insurers -->
+                        <div id="mob-insurers" onclick="showInsurerDetails()" class="w-full max-w-[280px] rounded-2xl p-4 border border-teal-500/50 cursor-pointer transition-all duration-300 text-center bg-[#041210] shadow-lg relative z-10">
+                            <div class="text-2xl mb-1">🛡️</div>
+                            <div class="font-bold text-white text-md font-sans">INSURERS</div>
+                            <div class="text-[9px] text-teal-400 uppercase tracking-wider mt-0.5">Delegated Capital Capacity</div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Dynamic Sourcing Board -->
@@ -738,17 +788,18 @@
             if (window.innerWidth < 1024) {
                 const panel = document.getElementById('diagram-info-panel');
                 if (panel) {
-                    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             }
         }
 
         // -----------------------------------------------------
-        // Interactive SVG Map Glow Controllers
+        // Interactive Dual-Map Glow Controllers
         // -----------------------------------------------------
         function highlightSVGNode(nodeId) {
-            const nodes = ['svg-brokers', 'svg-insurers', 'svg-exchange', 'svg-insights'];
-            nodes.forEach(id => {
+            // Update Desktop SVG Nodes
+            const desktopNodes = ['svg-brokers', 'svg-insurers', 'svg-exchange', 'svg-insights'];
+            desktopNodes.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
                     if (id === nodeId) {
@@ -757,6 +808,24 @@
                     } else {
                         el.classList.remove('svg-active-node');
                         el.classList.add('svg-dimmed-node');
+                    }
+                }
+            });
+
+            // Update Mobile HTML Nodes
+            const mobId = nodeId.replace('svg-', 'mob-');
+            const mobileNodes = ['mob-brokers', 'mob-insurers', 'mob-exchange', 'mob-insights'];
+            mobileNodes.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === mobId) {
+                        // Active state classes for mobile blocks
+                        el.classList.remove('opacity-50', 'scale-95');
+                        el.classList.add('scale-105', 'shadow-[0_0_25px_rgba(255,255,255,0.15)]', 'border-white/70');
+                    } else {
+                        // Dimmed state classes for mobile blocks
+                        el.classList.add('opacity-50', 'scale-95');
+                        el.classList.remove('scale-105', 'shadow-[0_0_25px_rgba(255,255,255,0.15)]', 'border-white/70');
                     }
                 }
             });
@@ -797,7 +866,7 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Optimising Exchange Matches';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>InsurX-Branded Slip Summaries:</strong> Use the data extraction engine to return to the broker instantly a clear well strucutred sumarry of the insurance slip- this might be useful for them to use, we could brand this as InsurX and it would give the broker incentive to send us Insurance Slips to just get the breakdown sumarry as if we weren't able to furfil certain slips then at least the broker got somethign out of it anyways- maybe we send it with the quote so in case the quote is not helpful or can't be furfilled they get value adn keep on sending slips?</li>
+                    <li><strong>InsurX-Branded Slip Summaries:</strong> Use the data extraction engine to return to the broker instantly a clear well strucutred sumarry of the insurance slip- this might be useful for them to use, we could brand this as InsurX and it would give the broker incentive to send us Insurance Slips to just get the breakdown sumarry as if we weren't able to furfil certain slips then at least the broker got somethign out of it anyways- maybe we send it with the quote so in case the quote is not helpful or can't be furfilled they get value adn keep on sending slips.</li>
                     <li><strong>Premium and Claim Settlement network:</strong> Act as the network to pay premiums and settle claims- acting as the monetary settelment framework, InsurX adds value to all partners by providing a more seamless and faster payment settlement process while at the same time gaining valuable data on profitable business and claim frequency.</li>
                 </ul>
             `;
