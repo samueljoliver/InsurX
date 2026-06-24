@@ -80,7 +80,6 @@
                 linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
-            transition: background 0.5s ease, color 0.5s ease;
         }
 
         .glass-panel {
@@ -89,7 +88,6 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            transition: background 0.5s ease, border 0.5s ease;
         }
 
         /* SVG Glow and Highlight Effects */
@@ -101,6 +99,17 @@
         .svg-dimmed-node {
             opacity: 0.35;
             transition: all 0.3s ease;
+        }
+        
+        /* Tactile SVG Hover Pop Animation */
+        .svg-node-hover {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .svg-node-hover:hover {
+            transform: scale(1.04);
+            cursor: pointer;
         }
 
         /* Scan Line Animation */
@@ -193,32 +202,21 @@
 
         @keyframes shine { 100% { transform: skewX(-12deg) translateX(150%); } }
 
-        /* SUGGESTION 2: SVG Path Animated Flow Packets */
+        /* Animated Flow Packets */
         .flow-packet {
             offset-rotate: auto;
             animation: movePacket 6s linear infinite;
         }
         @keyframes movePacket {
-            0% {
-                offset-distance: 0%;
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                offset-distance: 100%;
-                opacity: 0;
-            }
+            0% { offset-distance: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { offset-distance: 100%; opacity: 0; }
         }
     </style>
 </head>
 <body id="dashboard-wrapper" class="font-sans antialiased min-h-screen custom-scrollbar pb-16">
 
-    <!-- HEADER & HERO SECTION -->
     <header class="border-b border-slate-800/60 relative overflow-hidden backdrop-blur-sm z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <!-- Status Badges -->
@@ -237,11 +235,11 @@
                         Samuel Oliver <span class="text-sky-400 font-light">+</span> InsurX
                     </h1>
                     <p class="mt-3 text-lg text-slate-300 max-w-2xl font-light">
-                        A direct value proposition detailing my 6 years of FinTech scaling experience at Visa, precisely aligned to accelerate InsurX to its $1B premium exchange target.
+                        A direct value proposition detailing my 6 years of FinTech scaling experience at Visa, precisely aligned to accelerate InsurX to its target premium exchange volumes.
                     </p>
                 </div>
                 
-                <!-- Quick Contact Card -->
+                <!-- Quick Contact Card (Enhanced Styling) -->
                 <div class="glass-panel p-5 rounded-2xl flex items-center gap-4 shadow-2xl self-start lg:self-auto border border-slate-700/50">
                     <div class="bg-gradient-to-br from-sky-500 to-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
                         SO
@@ -252,15 +250,15 @@
                             <span class="text-xs font-normal text-sky-400 bg-sky-500/10 border border-sky-500/20 px-1.5 py-0.5 rounded">CMgr MCMI</span>
                         </div>
                         <div class="text-xs text-slate-400 font-mono mt-0.5">FinTech Specialist | Former Visa Product Analyst</div>
-                        <div class="flex flex-wrap gap-2 mt-3">
-                            <a href="mailto:samueloliverj@gmail.com" class="px-3 py-1 rounded bg-slate-900/80 hover:bg-emerald-500/15 border border-slate-850 hover:border-emerald-500/40 text-emerald-400 hover:text-emerald-350 text-xs font-mono transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
-                                <i class="fa-solid fa-envelope text-emerald-500 group-hover:scale-110 transition-transform"></i> Email
+                        <div class="flex flex-wrap gap-2.5 mt-3">
+                            <a href="mailto:samueloliverj@gmail.com" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 text-sm font-mono transition-all duration-300 shadow-[0_0_10px_rgba(16,185,129,0.1)] hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
+                                <i class="fa-solid fa-envelope group-hover:scale-110 transition-transform"></i> Email
                             </a>
-                            <a href="https://linkedin.com/in/samuel-oliver100" target="_blank" class="px-3 py-1 rounded bg-slate-900/80 hover:bg-sky-500/15 border border-slate-850 hover:border-sky-500/40 text-sky-400 hover:text-sky-350 text-xs font-mono transition-all duration-300 hover:shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
-                                <i class="fa-brands fa-linkedin text-sky-500 group-hover:scale-110 transition-transform"></i> LinkedIn
+                            <a href="https://linkedin.com/in/samuel-oliver100" target="_blank" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-sky-500/10 to-blue-500/10 border border-sky-500/30 hover:border-sky-400 text-sky-400 text-sm font-mono transition-all duration-300 shadow-[0_0_10px_rgba(14,165,233,0.1)] hover:shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
+                                <i class="fa-brands fa-linkedin group-hover:scale-110 transition-transform"></i> LinkedIn
                             </a>
-                            <a href="https://Samueljoliver.github.io/Samuel-Oliver-CV" target="_blank" class="px-3 py-1 rounded bg-slate-900/80 hover:bg-purple-500/15 border border-slate-850 hover:border-purple-500/40 text-purple-400 hover:text-purple-350 text-xs font-mono transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
-                                <i class="fa-solid fa-globe text-purple-500 group-hover:rotate-12 transition-transform"></i> Portfolio
+                            <a href="https://Samueljoliver.github.io/Samuel-Oliver-CV" target="_blank" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-purple-500/10 to-fuchsia-500/10 border border-purple-500/30 hover:border-purple-400 text-purple-400 text-sm font-mono transition-all duration-300 shadow-[0_0_10px_rgba(168,85,247,0.1)] hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:-translate-y-0.5 flex items-center gap-1.5 group">
+                                <i class="fa-solid fa-globe group-hover:rotate-12 transition-transform"></i> Portfolio
                             </a>
                         </div>
                     </div>
@@ -283,21 +281,21 @@
                             <i class="fa-solid fa-scale-balanced text-sm"></i>
                             <span class="text-white text-base font-bold font-sans" id="strength-2-title">Contract Navigation</span>
                         </div>
-                        <p class="text-xs text-slate-400 leading-relaxed font-light">Streamlined partner onboarding times at Visa and reduced billing times by 50% while checking complete compliance.</p>
+                        <p class="text-xs text-slate-400 leading-relaxed font-light">Streamlined partner on boarding times at Visa and reduced billing time by 50%.</p>
                     </div>
                     <div class="glass-panel p-4.5 rounded-xl border border-slate-800/80 hover:border-purple-500/40 transition-colors group">
                         <div class="flex items-center gap-2 mb-2 text-purple-400">
                             <i class="fa-solid fa-chart-line text-sm"></i>
-                            <span class="text-white text-base font-bold font-sans" id="strength-3-title">Data Monetisation</span>
+                            <span class="text-white text-base font-bold font-sans" id="strength-3-title">Data Analysis</span>
                         </div>
                         <p class="text-xs text-slate-400 leading-relaxed font-light">Built performance dashboards managing 25M+ rows of European transaction data to extract commercial insights.</p>
                     </div>
                     <div class="glass-panel p-4.5 rounded-xl border border-slate-800/80 hover:border-amber-500/40 transition-colors group">
                         <div class="flex items-center gap-2 mb-2 text-amber-400">
-                            <i class="fa-solid fa-handshake text-sm"></i>
-                            <span class="text-white text-base font-bold font-sans" id="strength-4-title">Strategic Sourcing</span>
+                            <i class="fa-solid fa-sitemap text-sm"></i>
+                            <span class="text-white text-base font-bold font-sans" id="strength-4-title">Product Management</span>
                         </div>
-                        <p class="text-xs text-slate-400 leading-relaxed font-light font-sans">Coordinated launching programs with early-stage partners, demonstrating deep operational focus.</p>
+                        <p class="text-xs text-slate-400 leading-relaxed font-light font-sans">Managed technical onboarding of international partners and led cross-functional execution.</p>
                     </div>
                 </div>
             </div>
@@ -314,7 +312,7 @@
                         <i class="fa-solid fa-diagram-project text-sky-500"></i> Interactive Growth Proposal: The InsurX Model
                     </h2>
                     <p class="text-slate-400 text-sm mt-1 font-light">
-                        Select a node below to explore my concrete, zero-friction ideas for driving transactional volume and scale.
+                        Select a node below to explore my ideas for driving premium volume and efficiency
                     </p>
                 </div>
                 <div class="flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 border border-slate-800 px-3 py-1.5 rounded-lg self-start">
@@ -363,26 +361,33 @@
                             <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-dasharray="5,5" />
                         </g>
 
-                        <!-- FLOW PIPELINES (Paths defined for animated packets) -->
+                        <!-- MAIN FLOW PIPELINES -->
                         <path id="path-broker-to-exchange" d="M 180 180 Q 290 150 400 180" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-blue)"/>
                         <path id="path-exchange-to-broker" d="M 400 220 Q 290 250 180 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
 
                         <path id="path-insurer-to-exchange" d="M 620 180 Q 510 150 400 180" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-teal)"/>
                         <path id="path-exchange-to-insurer" d="M 400 220 Q 510 250 620 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-                        <path id="path-exchange-to-insights-left" d="M 400 300 C 350 300, 110 320, 110 250" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
-                        <path id="path-exchange-to-insights-right" d="M 400 300 C 450 300, 690 320, 690 250" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                        <!-- NEW DEEP ROUTING PATHS (To/From Insights and Exchange) -->
+                        <path id="path-broker-to-insights" d="M 110 240 C 110 324, 200 324, 300 324" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                        <path id="path-insurer-to-insights" d="M 690 240 C 690 324, 600 324, 500 324" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                        <path id="path-insights-to-exchange" d="M 380 300 L 380 277" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                        <path id="path-exchange-to-insights" d="M 420 277 L 420 300" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
 
-                        <!-- SUGGESTION 2: Glowing Animated Flow Packets -->
+                        <!-- Glowing Animated Flow Packets -->
                         <circle r="5" fill="#60a5fa" class="flow-packet" style="offset-path: path('M 180 180 Q 290 150 400 180');" />
                         <circle r="4" fill="#a5f3fc" class="flow-packet" style="offset-path: path('M 400 220 Q 290 250 180 220'); animation-delay: 2s;" />
                         <circle r="5" fill="#2dd4bf" class="flow-packet" style="offset-path: path('M 620 180 Q 510 150 400 180');" />
                         <circle r="4" fill="#ccfbf1" class="flow-packet" style="offset-path: path('M 400 220 Q 510 250 620 220'); animation-delay: 3s;" />
-                        <circle r="4" fill="#fed7aa" class="flow-packet" style="offset-path: path('M 400 300 C 350 300, 110 320, 110 250'); animation-delay: 1.5s;" />
-                        <circle r="4" fill="#ffedd5" class="flow-packet" style="offset-path: path('M 400 300 C 450 300, 690 320, 690 250'); animation-delay: 4.5s;" />
+                        
+                        <!-- New data packets along the insights paths -->
+                        <circle r="4" fill="#fed7aa" class="flow-packet" style="offset-path: path('M 110 240 C 110 324, 200 324, 300 324'); animation-duration: 4s;" />
+                        <circle r="4" fill="#ffedd5" class="flow-packet" style="offset-path: path('M 690 240 C 690 324, 600 324, 500 324'); animation-duration: 4s; animation-delay: 2s;" />
+                        <circle r="4" fill="#f97316" class="flow-packet" style="offset-path: path('M 380 300 L 380 277'); animation-duration: 2s; animation-delay: 1s;" />
+                        <circle r="4" fill="#fb923c" class="flow-packet" style="offset-path: path('M 420 277 L 420 300'); animation-duration: 2s; animation-delay: 3s;" />
 
                         <!-- MODULE: CENTRAL EXCHANGE -->
-                        <g id="svg-exchange" class="cursor-pointer group select-none" onclick="showPlatformDetails()">
+                        <g id="svg-exchange" class="svg-node-hover cursor-pointer group select-none" onclick="showPlatformDetails()">
                             <circle cx="400" cy="200" r="70" fill="url(#glowGrad)" stroke="#3b82f6" stroke-width="2" class="transition-all duration-300 group-hover:stroke-blue-400" />
                             <circle cx="400" cy="200" r="77" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,10" />
                             <text x="400" y="195" font-family="Outfit" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">InsurX</text>
@@ -390,14 +395,14 @@
                         </g>
 
                         <!-- MODULE: MARKET INSIGHTS -->
-                        <g id="svg-insights" class="cursor-pointer group select-none" onclick="showInsightsDetails()">
+                        <g id="svg-insights" class="svg-node-hover cursor-pointer group select-none" onclick="showInsightsDetails()">
                             <rect x="300" y="300" width="200" height="48" rx="12" fill="#0b1329" stroke="#ea580c" stroke-width="1.5" />
                             <text x="400" y="321" font-family="Outfit" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Market Insights Platform</text>
                             <text x="400" y="336" font-family="JetBrains Mono" font-size="9" font-weight="bold" fill="#ea580c" text-anchor="middle">Data Sourcing</text>
                         </g>
 
                         <!-- MODULE: BROKERS (DEMAND) -->
-                        <g id="svg-brokers" class="cursor-pointer group select-none" onclick="showBrokerDetails()">
+                        <g id="svg-brokers" class="svg-node-hover cursor-pointer group select-none" onclick="showBrokerDetails()">
                             <rect x="40" y="140" width="140" height="100" rx="16" fill="url(#blueGrad)" stroke="#60a5fa" stroke-width="1.5" />
                             <rect x="55" y="125" width="110" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
                             <text x="110" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#60a5fa" text-anchor="middle">27 Broking Houses</text>
@@ -407,7 +412,7 @@
                         </g>
 
                         <!-- MODULE: INSURERS (SUPPLY) -->
-                        <g id="svg-insurers" class="cursor-pointer group select-none" onclick="showInsurerDetails()">
+                        <g id="svg-insurers" class="svg-node-hover cursor-pointer group select-none" onclick="showInsurerDetails()">
                             <rect x="620" y="140" width="140" height="100" rx="16" fill="url(#tealGrad)" stroke="#2dd4bf" stroke-width="1.5" />
                             <rect x="625" y="125" width="130" height="20" rx="8" fill="#050b14" stroke="#1e293b" stroke-width="1" />
                             <text x="690" y="138" font-family="JetBrains Mono" font-size="8.5" font-weight="bold" fill="#2dd4bf" text-anchor="middle">22 Follow Underwriters</text>
@@ -419,14 +424,14 @@
                         <!-- Inline labels -->
                         <text x="290" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#60a5fa" text-anchor="middle">Electronic Placement</text>
                         <text x="510" y="135" font-family="Outfit" font-size="9" font-weight="600" fill="#2dd4bf" text-anchor="middle">Authority Delegated</text>
-                        <text x="290" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">$150m+ Placed</text>
+                        <text x="290" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">$150m+ Placed (£118.5m+)</text>
                         <text x="510" y="270" font-family="Outfit" font-size="9.5" font-weight="500" fill="#94a3b8" text-anchor="middle">Match Rules Applied</text>
                     </svg>
                 </div>
 
                 <!-- Dynamic Sourcing Board -->
                 <div class="lg:col-span-4 flex flex-col justify-between">
-                    <div id="diagram-info-panel" class="glass-panel p-6 rounded-2xl h-full flex flex-col justify-between border border-slate-800">
+                    <div id="diagram-info-panel" class="glass-panel p-6 rounded-2xl h-full flex flex-col justify-between border border-slate-800 scroll-mt-6">
                         <div>
                             <span id="panel-tag" class="text-xs font-mono font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full">Interactive Pitch</span>
                             <h3 id="panel-title" class="text-xl font-extrabold text-white mt-4 font-sans">Growth & Execution Sourcing</h3>
@@ -438,16 +443,16 @@
 
                         <!-- Manual Select Hooks -->
                         <div class="grid grid-cols-2 gap-2.5 mt-8">
-                            <button onclick="showBrokerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-blue-500/5 hover:bg-blue-500/10 text-sky-400 rounded-xl text-left border border-blue-500/20 transition-all cursor-pointer">
+                            <button onclick="showBrokerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-blue-500/5 hover:bg-blue-500/10 text-sky-400 rounded-xl text-left border border-blue-500/20 transition-all cursor-pointer hover:scale-105">
                                 <i class="fa-solid fa-building-user mr-1.5 text-blue-400"></i> Broker Sourcing
                             </button>
-                            <button onclick="showInsurerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-400 rounded-xl text-left border border-emerald-500/20 transition-all cursor-pointer">
+                            <button onclick="showInsurerDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-400 rounded-xl text-left border border-emerald-500/20 transition-all cursor-pointer hover:scale-105">
                                 <i class="fa-solid fa-shield mr-1.5 text-emerald-400"></i> Insurer Onboarding
                             </button>
-                            <button onclick="showPlatformDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-purple-500/5 hover:bg-purple-500/10 text-purple-400 rounded-xl text-left border border-purple-500/20 transition-all cursor-pointer">
+                            <button onclick="showPlatformDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-purple-500/5 hover:bg-purple-500/10 text-purple-400 rounded-xl text-left border border-purple-500/20 transition-all cursor-pointer hover:scale-105">
                                 <i class="fa-solid fa-circle-nodes mr-1.5 text-purple-400"></i> Central Exchange
                             </button>
-                            <button onclick="showInsightsDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-orange-500/5 hover:bg-orange-500/10 text-orange-400 rounded-xl text-left border border-orange-500/20 transition-all cursor-pointer">
+                            <button onclick="showInsightsDetails()" class="text-xs font-mono font-semibold py-2.5 px-3 bg-orange-500/5 hover:bg-orange-500/10 text-orange-400 rounded-xl text-left border border-orange-500/20 transition-all cursor-pointer hover:scale-105">
                                 <i class="fa-solid fa-chart-line mr-1.5 text-orange-400"></i> Data Sourcing
                             </button>
                         </div>
@@ -460,10 +465,10 @@
         <section class="space-y-6">
             <div>
                 <h2 class="text-2xl font-extrabold text-white flex items-center gap-2 font-sans" id="sec-2-title">
-                    <i class="fa-solid fa-terminal text-sky-500"></i> Interactive Verification: InsurXOS Terminal
+                    <i class="fa-solid fa-terminal text-sky-500"></i> Analysing Samuel's CV through the InsurX Network Engine
                 </h2>
                 <p class="text-slate-400 text-sm mt-1 font-light">
-                    Run my structured credentials through a simulation of the InsurX workflow to map my execution experience against your 3D underwriting criteria.
+                    Run my structured credentials through a simulation of the InsurX workflow to map my execution experience against your 3D Job Description paramaters.
                 </p>
             </div>
 
@@ -507,12 +512,10 @@
                         </div>
                     </div>
 
-                    <!-- Vertical Timeline (Switches to responsive grid on mobile, progressive steps on desktop) -->
+                    <!-- Vertical Timeline -->
                     <nav class="flex-grow flex flex-col justify-center py-4 lg:p-6 lg:justify-start lg:mt-6">
                         <div class="relative pl-4 space-y-6 lg:space-y-8 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start">
-                            <!-- Line background -->
                             <div class="absolute left-[23px] top-4 bottom-4 w-px bg-slate-800 -z-10 hidden lg:block"></div>
-                            <!-- Animated active line -->
                             <div id="timeline-progress" class="absolute left-[23px] top-4 w-px bg-sky-500 shadow-[0_0_10px_#0ea5e9] transition-all duration-700 -z-10 hidden lg:block" style="height: 0%;"></div>
 
                             <div class="nav-step flex items-center gap-4 relative cursor-pointer" data-step="1">
@@ -550,7 +553,6 @@
                 <!-- Main Content Area -->
                 <main class="flex-grow flex flex-col relative overflow-hidden h-[600px] lg:h-full z-10" id="terminal-main-window">
                     
-                    <!-- Interactive Stages Container -->
                     <div class="flex-grow relative w-full h-full p-6 lg:p-8 flex items-center justify-center">
 
                         <!-- STAGE 1: Risk Submission (Uplink) -->
@@ -564,7 +566,6 @@
                                     <h3 class="font-bold text-white text-sm tracking-wide">01 Samuel Oliver CV.docx</h3>
                                     <p class="text-[10px] text-amber-500 font-mono mt-2 border border-amber-500/50 bg-amber-500/10 px-2.5 py-0.5 rounded uppercase">Unstructured Document</p>
                                     
-                                    <!-- Upload progress visualizer -->
                                     <div class="absolute bottom-6 w-3/4">
                                         <div class="flex justify-between text-[9px] font-mono text-sky-400 mb-1">
                                             <span>PARSING APPLICANT</span>
@@ -584,12 +585,9 @@
                             <div class="mb-4 inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-mono uppercase tracking-widest">Extracting Target Variable Nodes</div>
                             
                             <div class="relative flex items-center justify-center w-full max-w-3xl h-[450px]">
-                                <!-- Central Hub -->
                                 <div class="absolute z-20 w-20 h-20 rounded-full bg-sky-950/80 border-2 border-sky-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(14,165,233,0.4)] backdrop-blur">
                                     <i class="fa-solid fa-brain text-2xl text-sky-300 animate-pulse"></i>
                                 </div>
-
-                                <!-- Orbiting Nodes Container -->
                                 <div class="orbital-container" id="orbital-graph">
                                     <!-- Nodes injected dynamically via JS -->
                                 </div>
@@ -605,7 +603,6 @@
                                     <h2 class="text-xl md:text-2xl font-bold text-white font-sans">Role Requirement Match Map</h2>
                                 </div>
                                 
-                                <!-- Circular Score Widget -->
                                 <div class="w-24 h-24 relative flex items-center justify-center shrink-0">
                                     <svg viewBox="0 0 36 36" class="circular-chart absolute inset-0 w-full h-full drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]">
                                         <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -618,14 +615,12 @@
                                 </div>
                             </div>
 
-                            <!-- Data Table Headers -->
                             <div class="flex justify-between text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
                                 <div class="w-[45%]">Required Capabilities</div>
                                 <div class="w-[10%] text-center">Verify</div>
                                 <div class="w-[45%] text-right">Extracted proof (from Samuel's CV)</div>
                             </div>
 
-                            <!-- Scrollable Match List -->
                             <div class="flex-grow overflow-y-auto custom-scrollbar pr-2 space-y-3" id="hud-container">
                                 <!-- Rows injected via JS -->
                             </div>
@@ -636,7 +631,6 @@
                             
                             <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center overflow-y-auto lg:overflow-visible">
                                 
-                                <!-- Left: Terminal Execution -->
                                 <div class="glass-panel border border-slate-800 rounded-xl p-5 font-mono text-xs text-sky-400 h-56 lg:h-80 overflow-y-auto custom-scrollbar relative shadow-lg bg-slate-950/50">
                                     <div class="absolute top-0 left-0 w-full h-6 bg-slate-900 border-b border-slate-800 flex items-center px-3 gap-2 sticky">
                                         <div class="w-2 h-2 rounded-full bg-red-500"></div>
@@ -649,7 +643,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Right: The Dynamic Contract -->
                                 <div class="relative flex justify-center items-center h-56 lg:h-80 select-none">
                                     <div class="w-64 h-full bg-[#f8fafc] rounded-lg shadow-2xl p-5 flex flex-col border border-slate-300 text-slate-800 transform rotate-1">
                                         <div class="border-b border-slate-800 pb-1 mb-3 flex justify-between items-center">
@@ -672,7 +665,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Stamped seal -->
                                     <div id="auth-stamp" class="stamp-final absolute inset-0 flex items-center justify-center pointer-events-none">
                                         <div class="relative">
                                             <div class="absolute inset-0 bg-emerald-500 blur-xl opacity-30 rounded-full animate-ping"></div>
@@ -740,6 +732,18 @@
 
     <script>
         // -----------------------------------------------------
+        // Auto Scroll for Mobile View Utility
+        // -----------------------------------------------------
+        function scrollToPanel() {
+            if (window.innerWidth < 1024) {
+                const panel = document.getElementById('diagram-info-panel');
+                if (panel) {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        // -----------------------------------------------------
         // Interactive SVG Map Glow Controllers
         // -----------------------------------------------------
         function highlightSVGNode(nodeId) {
@@ -765,11 +769,11 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Driving Broker Volumes';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>Automated CRM Email Routing:</strong> Configure automated workflow structures. When a broker uploads a Lead insurance slip to their local CRM or pipeline manager, it auto-triggers an email parsing payload direct to InsurX, removing platform-login friction.</li>
-                    <li><strong>Lead-Insurer Sourcing Pipeline:</strong> Pitch major lead underwriters to share unfulfilled capacity before rejection. If a lead can only cover 20% of a risk, they instantly route the slip to us to coordinate follow-fulfilment in under an hour. We return a consolidated, fully-backed trade contract back to the broker. This sidesteps having to rely entirely on slower broker-by-broker acquisition.</li>
-                    <li><strong>Volume-Tiered Rebates:</strong> Design targeted commercial incentives to accelerate the pipeline and encourage rapid consolidation of entire books onto the platform.</li>
+                    <li><strong>Automated CRM Email Routing:</strong> Configure an automated system so that the CRM autoamtically triggers an email to InsurX when a Lead insurance slip is uploaded to the brokers CRM/ project manegement platform.</li>
+                    <li><strong>Lead-Insurer Sourcing Pipeline:</strong> Pitch major lead underwriters to share unfulfilled capacity slips with InsurX before returning to the broker. If a lead can only cover 20% of a risk, they route the slip to us. We return a consolidated, fully-backed trade contract back to the lead. Allowing the lead to return a fully placed slip back to the broker by "subcontracting" outstanding risk to our follow underwriters and receiving the "Premium cashback" as incentive and to cover the small additional risk of default liability due to sub-contracting. The Issuer is also incentivised to do this as it reduces the risk of the slip becomming unfurfilled/ it increases the speed in which capacity is put to work. The lead may also simply return to slip to the broker with a InsurX follower furfilment report. Through this the broker can see the value of InsurX acting as a marketing channel. This is of beneift to the lead as we may pay a referral fee for this and or the lead underwriter is more likely to furfil slips as mentioned before. This sidesteps having to rely entirely on slower broker-by-broker acquisition.</li>
                 </ul>
             `;
+            scrollToPanel();
         }
 
         function showInsurerDetails() {
@@ -779,10 +783,11 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Sourcing Exchange Capacity';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>Dual-Format Contract Onboarding:</strong> Accelerate delegated authority signing. Standardise legal boilerplate variables into clear, pre-vetted structures. Onboard partners using a two-copy delivery system: a plain-English reference explaining the operational logic behind each rule side-by-side with the clean compliance execution copy to preempt legal friction.</li>
-                    <li><strong>Frictionless Underwriter Launches:</strong> Leverage my experience building Visa program GTM pipelines. I will standardise follow-underwriter configuration milestones to cut onboarding cycles down from months to weeks.</li>
+                    <li><strong>Contract Modularisation:</strong> Standardise the "delegated authority" variables to drastically cut negotiation cycles from months to weeks. Provide two contracts when onbaording, one that explains all the terms in engliosh and the logic behind each term and then a clean contract that just has all the terms in teh contract- which will help reduce questions/ queeries and compelte contracts more easily.</li>
+                    <li><strong>Unfulfilled Risk Capacity:</strong> Extract data from platform risks that failed to bind. Present these quantified demand pipelines directly to prospective follow syndicates, showing real proven premium capacity they could serve.</li>
                 </ul>
             `;
+            scrollToPanel();
         }
 
         function showPlatformDetails() {
@@ -792,10 +797,11 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Optimising Exchange Matches';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>InsurX-Branded Slip Summaries:</strong> Add value to every submission. Use our extraction engine to instantly return a clean, structured visual breakdown of the insurance slip as an attachment alongside our quotes. Even if we cannot fulfil that particular risk immediately, the broker gets instant visual utility, establishing InsurX as their default analysis mechanism.</li>
-                    <li><strong>Operational Bottleneck Audits:</strong> Ruthlessly map trade lifecycles to build automated post-transaction settlement systems, ensuring transaction capacity can scale to $1B premium bounds without linear headcount creep.</li>
+                    <li><strong>InsurX-Branded Slip Summaries:</strong> Use the data extraction engine to return to the broker instantly a clear well strucutred sumarry of the insurance slip- this might be useful for them to use, we could brand this as InsurX and it would give the broker incentive to send us Insurance Slips to just get the breakdown sumarry as if we weren't able to furfil certain slips then at least the broker got somethign out of it anyways- maybe we send it with the quote so in case the quote is not helpful or can't be furfilled they get value adn keep on sending slips?</li>
+                    <li><strong>Premium and Claim Settlement network:</strong> Act as the network to pay premiums and settle claims- acting as the monetary settelment framework, InsurX adds value to all partners by providing a more seamless and faster payment settlement process while at the same time gaining valuable data on profitable business and claim frequency.</li>
                 </ul>
             `;
+            scrollToPanel();
         }
 
         function showInsightsDetails() {
@@ -805,11 +811,12 @@
             document.getElementById('panel-title').innerText = 'My Ideas for Data Sourcing & Analysis';
             document.getElementById('panel-desc').innerHTML = `
                 <ul class="list-disc pl-4 mt-3 space-y-3.5 text-slate-300 font-light text-sm">
-                    <li><strong>Underutilised Capacity Tracking:</strong> Mine exchange analytics to target follow-underwriters with custom reports. Show them precisely which overly-conservative underwriting parameters are causing them to lose transactional volume, framing target adjustments as found revenue.</li>
-                    <li><strong>Unfulfilled Risk Prospecting:</strong> Extract data from platform risks that failed to bind. Present these quantified demand pipelines directly to prospective capital providers, accelerating onboarding sales cycles using real, lost-opportunity figures.</li>
+                    <li><strong>Underutilised Capacity Analytics:</strong> Run analytics on the follow insureres who are under utilised so show them what risk paramaters are meaning they miss out on insurance volume, so help they pottentially adjust thier risk paramaters if they can see how much extra colume they would get.-</li>
+                    <li><strong>Unfulfilled Risk Lead Prospecting:</strong> Use data where an insurance slip wasn't furfilled to go to new lead underwriters to show them how much volume they could get from our system if they were willing to accept certain risks- it would help onbaord new underwriters and also make for a higher furfilled slip ratio.</li>
                     <li><strong>Broker Efficiency Benchmarking:</strong> Convert raw transactional telemetry into targeted scorecards showing brokers how their execution timing matches the platform averages, driving retention through performance indicators.</li>
                 </ul>
             `;
+            scrollToPanel();
         }
 
         // -----------------------------------------------------
@@ -1119,117 +1126,6 @@
                 if(graph) graph.innerHTML = '';
             }
             updateUI();
-        }
-
-        // -----------------------------------------------------
-        // Dark / Light Mode Toggle System Implementation
-        // -----------------------------------------------------
-        function toggleTheme() {
-            const body = document.body;
-            const sunIcon = document.getElementById('sun-icon');
-            const moonIcon = document.getElementById('moon-icon');
-            const themeText = document.getElementById('theme-text');
-            const themeToggleBtn = document.getElementById('theme-toggle-btn');
-            
-            body.classList.toggle('light-mode');
-            
-            const isLight = body.classList.contains('light-mode');
-            if (isLight) {
-                // Change UI icons
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-                themeText.innerText = "Dark Mode";
-                
-                // Adjust direct colors of specific static content blocks
-                document.getElementById('hero-title').classList.add('text-slate-900');
-                document.getElementById('hero-title').classList.remove('text-white');
-                document.getElementById('sec-1-title').classList.add('text-slate-900');
-                document.getElementById('sec-1-title').classList.remove('text-white');
-                document.getElementById('sec-2-title').classList.add('text-slate-900');
-                document.getElementById('sec-2-title').classList.remove('text-white');
-                
-                // Change contact cards to elegant dark gray borders
-                document.getElementById('profile-name').classList.add('text-slate-900');
-                document.getElementById('profile-name').classList.remove('text-white');
-                
-                // Change core strength labels
-                document.getElementById('strength-1-title').classList.add('text-slate-900');
-                document.getElementById('strength-1-title').classList.remove('text-white');
-                document.getElementById('strength-2-title').classList.add('text-slate-900');
-                document.getElementById('strength-2-title').classList.remove('text-white');
-                document.getElementById('strength-3-title').classList.add('text-slate-900');
-                document.getElementById('strength-3-title').classList.remove('text-white');
-                document.getElementById('strength-4-title').classList.add('text-slate-900');
-                document.getElementById('strength-4-title').classList.remove('text-white');
-
-                // Adjust terminal background styles smoothly
-                document.getElementById('terminal-wrapper').style.background = '#f1f5f9';
-                document.getElementById('terminal-wrapper').style.borderColor = '#cbd5e1';
-                document.getElementById('terminal-sidebar-el').style.background = '#e2e8f0';
-                document.getElementById('terminal-sidebar-el').style.borderColor = '#cbd5e1';
-                
-                // Adjust terminal active text nodes and profile cards inside the console
-                document.getElementById('terminal-profile-card').style.background = '#f8fafc';
-                document.getElementById('terminal-profile-card').style.borderColor = '#e2e8f0';
-                document.querySelectorAll('.nav-step span').forEach(el => el.classList.add('text-slate-800'));
-
-                // Change SVG background dynamically
-                document.getElementById('svg-container').style.background = '#f8fafc';
-                document.getElementById('svg-container').style.borderColor = '#cbd5e1';
-
-                // Synchronise dynamic description panel if present
-                document.getElementById('diagram-info-panel').style.background = 'rgba(255, 255, 255, 0.9)';
-                document.getElementById('diagram-info-panel').style.borderColor = '#cbd5e1';
-                document.getElementById('panel-title').style.color = '#0f172a';
-                document.getElementById('panel-desc-bold').style.color = '#0f172a';
-                applyThemeStylesToPanel();
-
-            } else {
-                // Change UI icons
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-                themeText.innerText = "Light Mode";
-                
-                // Restore direct colors
-                document.getElementById('hero-title').classList.remove('text-slate-900');
-                document.getElementById('hero-title').classList.add('text-white');
-                document.getElementById('sec-1-title').classList.remove('text-slate-900');
-                document.getElementById('sec-1-title').classList.add('text-white');
-                document.getElementById('sec-2-title').classList.remove('text-slate-900');
-                document.getElementById('sec-2-title').classList.add('text-white');
-                
-                document.getElementById('profile-name').classList.remove('text-slate-900');
-                document.getElementById('profile-name').classList.add('text-white');
-                
-                document.getElementById('strength-1-title').classList.remove('text-slate-900');
-                document.getElementById('strength-1-title').classList.add('text-white');
-                document.getElementById('strength-2-title').classList.remove('text-slate-900');
-                document.getElementById('strength-2-title').classList.add('text-white');
-                document.getElementById('strength-3-title').classList.remove('text-slate-900');
-                document.getElementById('strength-3-title').classList.add('text-white');
-                document.getElementById('strength-4-title').classList.remove('text-slate-900');
-                document.getElementById('strength-4-title').classList.add('text-white');
-
-                // Restore terminal wrapper backgrounds
-                document.getElementById('terminal-wrapper').style.background = '#070d19/90';
-                document.getElementById('terminal-wrapper').style.borderColor = '';
-                document.getElementById('terminal-sidebar-el').style.background = '#0d1626/90';
-                document.getElementById('terminal-sidebar-el').style.borderColor = '';
-                
-                document.getElementById('terminal-profile-card').style.background = '';
-                document.getElementById('terminal-profile-card').style.borderColor = '';
-                document.querySelectorAll('.nav-step span').forEach(el => el.classList.remove('text-slate-800'));
-
-                // Restore SVG background
-                document.getElementById('svg-container').style.background = '';
-                document.getElementById('svg-container').style.borderColor = '';
-
-                // Restore dynamic description panel
-                document.getElementById('diagram-info-panel').style.background = '';
-                document.getElementById('diagram-info-panel').style.borderColor = '';
-                document.getElementById('panel-title').style.color = '';
-                document.getElementById('panel-desc-bold').style.color = '';
-            }
         }
 
         // Initialize UI Elements
